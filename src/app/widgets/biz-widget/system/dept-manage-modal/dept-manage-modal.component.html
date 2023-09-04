@@ -1,0 +1,30 @@
+<form nz-form [formGroup]="addEditForm">
+  <nz-form-item>
+    <nz-form-label nzFor="departmentName" nzRequired [nzSm]="6" [nzXs]="24">Department name</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <input id="departmentName" name="departmentName" formControlName="departmentName" nz-input placeholder="Please enter department name" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="state" nzRequired [nzSm]="6" [nzXs]="24">Department status</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <nz-radio-group formControlName="state">
+        <label nz-radio [nzValue]="false">Disable</label>
+        <label nz-radio [nzValue]="true">Available</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="orderNum" nzRequired [nzSm]="6" [nzXs]="24">Sort</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <input id="orderNum" name="orderNum" formControlName="orderNum" nz-input placeholder="Sort" />
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<ng-template #combineTpl let-control>
+  <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
+  <ng-container *ngIf="control.hasError('required')">required fields</ng-container>
+</ng-template>

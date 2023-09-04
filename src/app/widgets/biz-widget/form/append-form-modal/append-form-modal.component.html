@@ -1,0 +1,50 @@
+<form nz-form [formGroup]="addEditForm">
+  <nz-form-item>
+    <nz-form-label nzFor="taskName" nzRequired [nzSm]="4" [nzXs]="24">mission name</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+      <input id="taskName" formControlName="taskName" nz-input placeholder="mission name" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="taskDesc" [nzSm]="4" [nzXs]="24">mission details</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+      <textarea id="taskDesc" formControlName="taskDesc" maxlength="255" nz-input placeholder="mission details" rows="4"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="userName" nzRequired [nzSm]="4" [nzXs]="24">Executor</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+      <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+        <input id="userName" formControlName="userName" nz-input placeholder="Executor" />
+      </nz-form-control>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="startTime" nzRequired [nzSm]="4" [nzXs]="24">Starting time</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+      <nz-date-picker formControlName="startTime"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="endTime" nzRequired [nzSm]="4" [nzXs]="24">deadline</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+      <nz-date-picker formControlName="endTime"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzFor="finishRate" nzRequired [nzSm]="4" [nzXs]="24">Complete schedule</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="18" [nzXs]="24">
+      <nz-slider formControlName="finishRate" [nzTipFormatter]="formatter" [nzTooltipPlacement]="'bottom'"></nz-slider>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<ng-template #combineTpl let-control>
+  <ng-container *ngIf="control.hasError('message')">{{ control.errors.message }}</ng-container>
+  <ng-container *ngIf="control.hasError('required')">required fields</ng-container>
+</ng-template>
+<ng-template #tagPlaceHolder let-selectedList>and more{{ selectedList.length }}people</ng-template>

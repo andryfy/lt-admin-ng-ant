@@ -1,0 +1,79 @@
+<nz-card [nzBodyStyle]="{ padding: '10px 24px' }" [nzBordered]="false">
+  <div class="left-start-center">
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>Front Page</nz-breadcrumb-item>
+      <nz-breadcrumb-item>Dashboard</nz-breadcrumb-item>
+      <nz-breadcrumb-item>Monitoring page</nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </div>
+</nz-card>
+<section class="content-wrap">
+  <section nz-row [nzGutter]="[16, 16]">
+    <div nz-col [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXl]="18" [nzXs]="24" [nzXXl]="18">
+      <nz-card nzTitle="Activity real-time transaction status">
+        <div nz-row [nzGutter]="[40, 16]">
+          <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
+            <nz-row [nzGutter]="16">
+              <nz-col [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
+                <nz-statistic [nzTitle]="'Total transaction amount today'" [nzValue]="(124543233 | number)! + '$'"></nz-statistic>
+              </nz-col>
+              <nz-col [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
+                <nz-statistic [nzTitle]="'Sales target completion rate'" [nzValue]="(0.92 | percent)!"></nz-statistic>
+              </nz-col>
+            </nz-row>
+          </div>
+          <div nz-col [nzLg]="12" [nzMd]="12" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
+            <nz-row [nzGutter]="16">
+              <nz-col [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
+                <nz-countdown [nzFormat]="'HH:mm:ss:SSS'" [nzTitle]="'Remaining time of activity'" [nzValue]="deadline"></nz-countdown>
+              </nz-col>
+              <nz-col [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
+                <nz-statistic [nzTitle]="'Total transactions per second'" [nzValue]="(234 | number)! + '$'"></nz-statistic>
+              </nz-col>
+            </nz-row>
+          </div>
+          <div nz-col nzSpan="24" style="min-height: 430px">
+            <div id="map"></div>
+          </div>
+        </div>
+      </nz-card>
+    </div>
+    <div nz-col [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXl]="6" [nzXs]="24" [nzXXl]="6">
+      <div class="card-wrap-line">
+        <nz-card nzTitle="Activity forecast">
+          <div class="card-top">
+            <div nz-typography nzType="secondary">Goal Assessment</div>
+            <div class="title">Expected to meet expectations</div>
+          </div>
+          <div>
+            <div id="miniArea"></div>
+          </div>
+        </nz-card>
+
+        <nz-card class="m-t-15" nzTitle="Bond core efficiency">
+          <div id="dashBoard"></div>
+        </nz-card>
+      </div>
+    </div>
+
+    <div nz-col [nzLg]="24" [nzMd]="24" [nzSm]="24" [nzXl]="12" [nzXs]="24" [nzXXl]="12">
+      <nz-card nzTitle="The proportion of each category">
+        <div nz-row>
+          <div id="ringProgress1" class="pipe-height center" nz-col [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXl]="8" [nzXs]="8" [nzXXl]="8"></div>
+          <div id="ringProgress2" class="pipe-height center" nz-col [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXl]="8" [nzXs]="8" [nzXXl]="8"></div>
+          <div id="ringProgress3" class="pipe-height center" nz-col [nzLg]="8" [nzMd]="8" [nzSm]="8" [nzXl]="8" [nzXs]="8" [nzXXl]="8"></div>
+        </div>
+      </nz-card>
+    </div>
+    <div nz-col [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXl]="6" [nzXs]="24" [nzXXl]="6">
+      <nz-card nzTitle="Popular searches">
+        <div id="wordCloud" class="pipe-height"></div>
+      </nz-card>
+    </div>
+    <div nz-col [nzLg]="12" [nzMd]="24" [nzSm]="24" [nzXl]="6" [nzXs]="24" [nzXXl]="6">
+      <nz-card nzTitle="Resource surplus">
+        <div id="liquidPlot" class="pipe-height"></div>
+      </nz-card>
+    </div>
+  </section>
+</section>

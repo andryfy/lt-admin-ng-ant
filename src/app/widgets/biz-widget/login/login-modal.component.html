@@ -1,0 +1,18 @@
+<form nz-form [formGroup]="loginModalForm">
+  <nz-form-item>
+    <nz-form-label nzFor="userName" nzRequired [nzSm]="6" [nzXs]="24">username</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <input id="userName" formControlName="userName" nz-input placeholder="username" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="password" nzRequired [nzSm]="6" [nzXs]="24">password</nz-form-label>
+    <nz-form-control [nzErrorTip]="combineTpl" [nzSm]="14" [nzXs]="24">
+      <input id="password" name="password" formControlName="password" nz-input placeholder="Please enter password" />
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<ng-template #combineTpl let-control>
+  <ng-container *ngIf="control.hasError('required')">required fields</ng-container>
+</ng-template>

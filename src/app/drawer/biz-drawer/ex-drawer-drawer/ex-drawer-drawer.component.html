@@ -1,0 +1,12 @@
+<p>
+  The value brought over:
+  <span class="sp-28 text-error">{{ params.name }}</span>
+</p>
+<form [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-label nzRequired>Try entering the value and click OK</nz-form-label>
+    <nz-form-control nzErrorTip="required fields">
+      <input formControlName="password" nz-input [placeholder]="'Enter the content and click OK to return to the external'" />
+    </nz-form-control>
+  </nz-form-item>
+</form>

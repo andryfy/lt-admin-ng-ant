@@ -1,0 +1,60 @@
+<div class="login-form-wrap">
+  <form class="login-form" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-tabset [nzAnimated]="false">
+      <nz-tab nzTitle="Account password login">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Account name: admin">
+            <nz-input-group nzPrefixIcon="user" [nzSize]="'large'">
+              <input type="text" formControlName="userName" nz-input placeholder="Username" [placeholder]="'Account name: admin'" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Password: 123456">
+            <nz-input-group nzPrefixIcon="lock" [nzSize]="'large'">
+              <input type="password" autocomplete="on" formControlName="password" nz-input placeholder="password" [placeholder]="'Password: 123456'" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-tab>
+
+      <nz-tab nzTitle="Mobile phone number login">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="please enter user name!">
+            <nz-input-group nzPrefixIcon="mobile" [nzSize]="'large'">
+              <input type="text" autocomplete="on" formControlName="userName" nz-input placeholder="Phone number" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row nzJustify="space-between">
+          <nz-form-control class="flex-1" nz-col nzErrorTip="please enter verification code!" style="max-width: 65%" [nzSm]="16" [nzXs]="15">
+            <nz-input-group nzPrefixIcon="mail" [nzSize]="'large'">
+              <input type="password" formControlName="password" nz-input placeholder="password" />
+            </nz-input-group>
+          </nz-form-control>
+          <button class="p-0" nz-button nz-col nzType="default" [nzSize]="'large'" [nzSm]="7" [nzXs]="7">Get verification code</button>
+        </nz-form-item>
+      </nz-tab>
+    </nz-tabset>
+    <div class="login-form-margin" nz-row>
+      <div nz-col [nzSpan]="12">
+        <label formControlName="remember" nz-checkbox>
+          <span>auto login</span>
+        </label>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <a class="login-form-forgot">Forget the password</a>
+      </div>
+    </div>
+    <button class="login-form-button login-form-margin" nz-button nzSize="large" [nzType]="'primary'">Log in</button>
+    <div class="other-way">
+      <div class="other-login">
+        <span>Other ways to log in</span>
+        <i nz-icon nzTheme="fill" nzType="alipay-circle"></i>
+        <i nz-icon nzTheme="fill" nzType="taobao-circle"></i>
+        <i nz-icon nzTheme="fill" nzType="weibo-circle"></i>
+      </div>
+      <a routerLink="/login/register-form">Registered User</a>
+    </div>
+  </form>
+</div>

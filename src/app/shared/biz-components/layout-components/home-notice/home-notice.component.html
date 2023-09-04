@@ -1,0 +1,37 @@
+<nz-card [nzBodyStyle]="{ padding: 0 }">
+  <nz-tabset nzCentered [nzTabBarStyle]="{ paddingLeft: '15px', paddingRight: '15px' }">
+    <nz-tab nzTitle="Notify(4)">
+      <ng-container *ngTemplateOutlet="notificationTpl"></ng-container>
+    </nz-tab>
+    <nz-tab nzTitle="Information(3)">
+      <ng-container *ngTemplateOutlet="notificationTpl"></ng-container>
+    </nz-tab>
+    <nz-tab nzTitle="Upcoming(4)">
+      <ng-container *ngTemplateOutlet="notificationTpl"></ng-container>
+    </nz-tab>
+  </nz-tabset>
+</nz-card>
+<ng-template #notificationTpl>
+  <nz-list nzItemLayout="horizontal">
+    <nz-list-item *ngFor="let i of 4 | numberLoop">
+      <nz-list-item-meta>
+        <nz-list-item-meta-title>
+          <div class="flex p-l-10 p-r-10">
+            <span class="flex-1" nz-typography nzEllipsis>Third-party emergency code changes</span>
+            <nz-tag class="m-l-10" [nzColor]="'red'">Expires soon</nz-tag>
+          </div>
+        </nz-list-item-meta-title>
+        <nz-list-item-meta-description>
+          <div class="p-l-10 p-r-10">
+            <p nz-typography nzEllipsis nzType="secondary" [nzEllipsisRows]="3">Submitted by Little Boy 2023-09-01，Code change tasks need to be completed before 2023-09-04</p>
+            <p>Review time: 2023-09-04</p>
+          </div>
+        </nz-list-item-meta-description>
+      </nz-list-item-meta>
+    </nz-list-item>
+    <!--  <nz-list-empty *ngIf="deptNoticeListObj.checkRecordDtos.length === 0"></nz-list-empty>-->
+    <nz-list-footer>
+      <div class="center operate-text full-with full-height">Clear notifications</div>
+    </nz-list-footer>
+  </nz-list>
+</ng-template>
