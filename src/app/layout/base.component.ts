@@ -44,13 +44,13 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
   ]
 })
 export class BaseComponent implements OnInit, AfterViewInit {
-  isCollapsed$ = this.themesService.getIsCollapsed();
-  themeOptions$ = this.themesService.getThemesMode();
+  isCollapsed$ = this.themeService.getIsCollapsed();
+  themeOptions$ = this.themeService.getThemeMode();
   isCollapsed = false;
   isOverMode = false; // When the window becomes narrower, whether the navigation bar becomes drawer mode
   @ViewChild('navDrawer') navDrawer!: NavDrawerComponent;
   destroyRef = inject(DestroyRef);
-  constructor(private themesService: ThemeService, private driverService: DriverService, private windowService: WindowService) {}
+  constructor(private themeService: ThemeService, private driverService: DriverService, private windowServicevice: WindowService) {}
 
   changeCollapsed(): void {
     if (this.isOverMode) {
@@ -58,16 +58,16 @@ export class BaseComponent implements OnInit, AfterViewInit {
       return;
     }
     this.isCollapsed = !this.isCollapsed;
-    this.themesService.setIsCollapsed(this.isCollapsed);
+    this.themeService.setIsCollapsed(this.isCollapsed);
   }
 
   // Monitor various streams
   subTheme(): void {
-    this.themesService
+    this.themeService
       .getIsCollapsed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => (this.isCollapsed = res));
-    this.themesService
+    this.themeService
       .getIsOverMode()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => (this.isOverMode = res));
@@ -78,10 +78,10 @@ export class BaseComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.windowService.getStorage(IsFirstLogin) === 'false') {
+    if (this.windowServicevice.getStorage(IsFirstLogin) === 'false') {
       return;
     }
-    this.windowService.setStorage(IsFirstLogin, 'false');
+    this.windowServicevice.setStorage(IsFirstLogin, 'false');
     this.driverService.load();
   }
 

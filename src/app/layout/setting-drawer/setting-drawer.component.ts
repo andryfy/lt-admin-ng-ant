@@ -5,13 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
-import { IsNightKey, ThemeOptionsKey } from '@config/constant';
+import { ThemeOption } from '@app/core/services/types';
+import { InitTheme, IsNightKey, ThemeOptionKey } from '@config/constant';
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
 import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
 import { TabService } from '@core/services/common/tab.service';
 import { ThemeSkinService } from '@core/services/common/theme-skin.service';
 import { WindowService } from '@core/services/common/window.service';
-import { SettingInterface, ThemeService } from '@store/common-store/theme.service';
+import { ThemeService } from '@store/common-store/theme.service';
 import { fnFormatToHump } from '@utils/tools';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzConfigService } from 'ng-zorro-antd/core/config';
@@ -54,25 +55,10 @@ export interface ThemeMode extends NormalModel {
   imports: [CdkDrag, NgIf, NzIconModule, NzButtonModule, NzDrawerModule, NgFor, NzToolTipModule, NzDividerModule, NzListModule, NzSwitchModule, FormsModule]
 })
 export class SettingDrawerComponent implements OnInit {
-  themesOptions$ = this.themesService.getThemesMode();
-  isNightTheme$ = this.themesService.getIsNightTheme();
+  themeOption$ = this.themeService.getThemeMode();
+  isNightTheme$ = this.themeService.getIsNightTheme();
   _isNightTheme = false;
-  _themesOptions: SettingInterface = {
-    theme: 'dark',
-    color: '#1890FF',
-    mode: 'side',
-    fixedTab: false,
-    isShowTab: true,
-    splitNav: true,
-    greyTheme: false,
-    colorWeak: false,
-    fixedLeftNav: true,
-    fixedHead: true,
-    hasTopArea: true,
-    hasFooterArea: true,
-    hasNavArea: true,
-    hasNavHeadArea: true
-  };
+  _themeOption: ThemeOption = InitTheme;
   isCollapsed = false;
   dragging = false;
 
@@ -162,16 +148,16 @@ export class SettingDrawerComponent implements OnInit {
   ];
 
   constructor(
-    private themesService: ThemeService,
-    private loginInOutService: LoginInOutService,
-    private tabService: TabService,
     private activatedRoute: ActivatedRoute,
-    @Inject(DOCUMENT) private doc: Document,
     public message: NzMessageService,
+    private rd2: Renderer2,
+    private themeService: ThemeService,
+    private tabService: TabService,
     private nzConfigService: NzConfigService,
     private themeSkinService: ThemeSkinService,
-    private windowServe: WindowService,
-    private rd2: Renderer2
+    private windowServicevice: WindowService,
+    private loginInOutService: LoginInOutService,
+    @Inject(DOCUMENT) private doc: Document
   ) {}
 
   changeCollapsed(): void {
@@ -185,14 +171,14 @@ export class SettingDrawerComponent implements OnInit {
   changePrimaryColor(color: Color): void {
     this.selOne(color as NormalModel, this.colors);
     this.nzConfigService.set('theme', { primaryColor: color.color });
-    this._themesOptions.color = color.color;
-    this.setThemeOptions();
+    this._themeOption.color = color.color;
+    this.setThemeOption();
   }
 
   // Modify the night theme
   changeNightTheme(isNight: boolean): void {
-    this.windowServe.setStorage(IsNightKey, `${isNight}`);
-    this.themesService.setIsNightTheme(isNight);
+    this.windowServicevice.setStorage(IsNightKey, `${isNight}`);
+    this.themeService.setIsNightTheme(isNight);
     this.themeSkinService.toggleTheme().then();
   }
 
@@ -204,32 +190,32 @@ export class SettingDrawerComponent implements OnInit {
 
   changeMode(mode: ThemeMode): void {
     this.selOne(mode, this.modes);
-    this.themesService.setIsCollapsed(false);
-    this._themesOptions.mode = mode.key;
-    this.setThemeOptions();
+    this.themeService.setIsCollapsed(false);
+    this._themeOption.mode = mode.key;
+    this.setThemeOption();
   }
 
   // switch theme
   changeTheme(themeItem: Theme): void {
     this.selOne(themeItem, this.themes);
-    this._themesOptions.theme = themeItem.key;
-    this.setThemeOptions();
+    this._themeOption.theme = themeItem.key;
+    this.setThemeOption();
   }
 
   // Set theme parameters
-  setThemeOptions(): void {
-    this.themesService.setThemesMode(this._themesOptions);
-    this.windowServe.setStorage(ThemeOptionsKey, JSON.stringify(this._themesOptions));
+  setThemeOption(): void {
+    this.themeService.setThemeMode(this._themeOption);
+    this.windowServicevice.setStorage(ThemeOptionKey, JSON.stringify(this._themeOption));
   }
 
   // Modify fixed header
   changeFixed(isTrue: boolean, type: 'isShowTab' | 'splitNav' | 'fixedTab' | 'fixedLeftNav' | 'fixedHead' | 'hasTopArea' | 'hasFooterArea' | 'hasNavArea' | 'hasNavHeadArea'): void {
     // When the header is not fixed, the set label is not fixed either.
     if (type === 'fixedHead' && !isTrue) {
-      this._themesOptions['fixedTab'] = false;
+      this._themeOption['fixedTab'] = false;
     }
-    this._themesOptions[type] = isTrue;
-    this.setThemeOptions();
+    this._themeOption[type] = isTrue;
+    this.setThemeOption();
 
     // If multiple tabs are not displayed, the tab and all components that have been cached must be cleared.
     if (type === 'isShowTab') {
@@ -252,31 +238,31 @@ export class SettingDrawerComponent implements OnInit {
     } else {
       this.rd2.removeClass(name[0], themeType);
     }
-    this._themesOptions[theme as SpecialThemeHump] = e;
-    this.setThemeOptions();
+    this._themeOption[theme as SpecialThemeHump] = e;
+    this.setThemeOption();
   }
 
   initThemeOption(): void {
     this.isNightTheme$.pipe(first()).subscribe(res => (this._isNightTheme = res));
-    this.themesOptions$.pipe(first()).subscribe(res => {
-      this._themesOptions = res;
+    this.themeOption$.pipe(first()).subscribe(res => {
+      this._themeOption = res;
     });
 
     // Special mode theme transformation (color weak mode, gray mode)
     (['grey-theme', 'color-weak'] as SpecialTheme[]).forEach(item => {
       const specialTheme = fnFormatToHump(item);
-      this.changeSpecialTheme(this._themesOptions[specialTheme as SpecialThemeHump], item);
+      this.changeSpecialTheme(this._themeOption[specialTheme as SpecialThemeHump], item);
     });
 
     this.modes.forEach(item => {
-      item.isChecked = item.key === this._themesOptions.mode;
+      item.isChecked = item.key === this._themeOption.mode;
     });
     this.colors.forEach(item => {
-      item.isChecked = item.color === this._themesOptions.color;
+      item.isChecked = item.color === this._themeOption.color;
     });
     this.changePrimaryColor(this.colors.find(item => item.isChecked)!);
     this.themes.forEach(item => {
-      item.isChecked = item.key === this._themesOptions.theme;
+      item.isChecked = item.key === this._themeOption.theme;
     });
   }
 

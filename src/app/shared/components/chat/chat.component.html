@@ -3,7 +3,7 @@
     <div #scrollMe class="flex chart-content">
       <span class="text-center sp-12 m-b-5" nz-typography nzType="secondary">2021-7-27</span>
       <div nz-row>
-        <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="assets/imgs/logo.svg"></nz-avatar>
+        <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="/assets/imgs/logo.svg"></nz-avatar>
         <div class="m-t-0 p-8" nz-col nz-result-content nzFlex="1">
           Please
           <span nz-typography nzType="danger">A Word</span>
@@ -13,7 +13,7 @@
       </div>
       <ng-container *ngFor="let item of messageArray; let last = last">
         <div *ngIf="item.dir === 'left'" class="m-t-20" nz-row>
-          <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="assets/imgs/logo.svg"></nz-avatar>
+          <nz-avatar class="m-r-8" nz-col nzFlex="30px" nzIcon="user" nzSrc="/assets/imgs/logo.svg"></nz-avatar>
           <div class="m-t-0 p-8" nz-col nz-result-content nzFlex="1">
             {{ item.msg }}
           </div>
@@ -40,7 +40,7 @@
           -->
 
           <div nz-col nzFlex="8px"></div>
-          <nz-avatar nz-col nzFlex="30px" nzIcon="user" nzSrc="assets/imgs/default_face.png"></nz-avatar>
+          <nz-avatar nz-col nzFlex="30px" nzIcon="user" nzSrc="/assets/imgs/default_face.png"></nz-avatar>
         </div>
       </ng-container>
     </div>

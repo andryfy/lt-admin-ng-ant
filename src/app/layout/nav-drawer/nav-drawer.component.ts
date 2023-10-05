@@ -18,12 +18,12 @@ import { SideNavComponent } from '../side-nav/side-nav.component';
 })
 export class NavDrawerComponent implements OnInit {
   isShowModal = false;
-  themesOptions$ = this.themesService.getThemesMode();
+  themeOption$ = this.themeService.getThemeMode();
   destroyRef = inject(DestroyRef);
-  constructor(private cdr: ChangeDetectorRef, private themesService: ThemeService) {}
+  constructor(private cdr: ChangeDetectorRef, private themeService: ThemeService) {}
 
   subTheme(): void {
-    this.themesService
+    this.themeService
       .getIsOverMode()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {

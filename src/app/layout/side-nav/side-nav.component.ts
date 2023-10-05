@@ -15,11 +15,11 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
   imports: [NgIf, NavBarComponent, AsyncPipe]
 })
 export class SideNavComponent implements OnInit {
-  themesOptions$ = this.themesService.getThemesMode();
-  isNightTheme$ = this.themesService.getIsNightTheme();
-  isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
+  themeOption$ = this.themeService.getThemeMode();
+  isNightTheme$ = this.themeService.getIsNightTheme();
+  isCollapsed$: Observable<boolean> = this.themeService.getIsCollapsed();
 
-  constructor(private themesService: ThemeService) {}
+  constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {}
 }

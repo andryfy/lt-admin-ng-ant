@@ -3,10 +3,12 @@ import { Component, OnInit, ChangeDetectionStrategy, inject, DestroyRef } from '
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 
+import { InitTheme } from '@app/config/constant';
+import { ThemeOption } from '@app/core/services/types';
 import { ChatComponent } from '@shared/components/chat/chat.component';
 import { TopProgressBarComponent } from '@shared/components/top-progress-bar/top-progress-bar.component';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
-import { SettingInterface, ThemeService } from '@store/common-store/theme.service';
+import { ThemeService } from '@store/common-store/theme.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzNoAnimationModule } from 'ng-zorro-antd/core/no-animation';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -25,53 +27,38 @@ import { SettingDrawerComponent } from '../setting-drawer/setting-drawer.compone
 })
 export class DefLayoutContentComponent implements OnInit {
   showChats = true;
-  isNightTheme$ = this.themesService.getIsNightTheme();
-  themesOptions$ = this.themesService.getThemesMode();
+  isNightTheme$ = this.themeService.getIsNightTheme();
+  themeOption$ = this.themeService.getThemeMode();
   isMixiMode = false;
-  themesOptions: SettingInterface = {
-    theme: 'dark',
-    color: '',
-    mode: 'side',
-    splitNav: false,
-    isShowTab: true,
-    fixedTab: false,
-    colorWeak: false,
-    greyTheme: false,
-    fixedHead: false,
-    fixedLeftNav: false,
-    hasTopArea: true,
-    hasFooterArea: true,
-    hasNavArea: true,
-    hasNavHeadArea: true
-  };
+  themeOption: ThemeOption = InitTheme;
   isFixedLeftNav = false;
-  isOverMode$: Observable<boolean> = this.themesService.getIsOverMode();
-  isCollapsed$: Observable<boolean> = this.themesService.getIsCollapsed();
+  isOverMode$: Observable<boolean> = this.themeService.getIsOverMode();
+  isCollapsed$: Observable<boolean> = this.themeService.getIsCollapsed();
   // In mixed mode, determine whether the top menu has a submenu. If there is no submenu, hide the left menu.
   mixiModeLeftNav = this.splitNavStoreService.getSplitLeftNavArrayStore();
   contentMarginTop = '48px';
   destroyRef = inject(DestroyRef);
-  constructor(private themesService: ThemeService, private splitNavStoreService: SplitNavStoreService) {}
+  constructor(private themeService: ThemeService, private splitNavStoreService: SplitNavStoreService) {}
 
   changeCollapsed(isCollapsed: boolean): void {
-    this.themesService.setIsCollapsed(isCollapsed);
+    this.themeService.setIsCollapsed(isCollapsed);
   }
 
-  getThemeOptions(): void {
-    this.themesOptions$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
-      this.themesOptions = res;
+  getThemeOption(): void {
+    this.themeOption$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
+      this.themeOption = res;
       this.isMixiMode = res.mode === 'mixi';
-      this.isFixedLeftNav = this.themesOptions.fixedLeftNav;
+      this.isFixedLeftNav = this.themeOption.fixedLeftNav;
 
-      if (this.themesOptions.fixedHead && !this.isMixiMode && this.themesOptions.hasTopArea) {
-        this.contentMarginTop = this.themesOptions.isShowTab ? (this.themesOptions.fixedTab ? '96px' : '48px') : '48px';
+      if (this.themeOption.fixedHead && !this.isMixiMode && this.themeOption.hasTopArea) {
+        this.contentMarginTop = this.themeOption.isShowTab ? (this.themeOption.fixedTab ? '96px' : '48px') : '48px';
       } else {
-        this.contentMarginTop = this.themesOptions.isShowTab ? (this.themesOptions.fixedTab ? '48px' : '0px') : '0px';
+        this.contentMarginTop = this.themeOption.isShowTab ? (this.themeOption.fixedTab ? '48px' : '0px') : '0px';
       }
     });
   }
 
   ngOnInit(): void {
-    this.getThemeOptions();
+    this.getThemeOption();
   }
 }

@@ -1,59 +1,38 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Theme, ThemeMode } from '@app/layout/setting-drawer/setting-drawer.component';
+import { InitTheme, ThemeOptionKey } from '@app/config/constant';
+import { WindowService } from '@core/services/common/window.service';
 
-export interface SettingInterface {
-  theme: Theme['key']; // Theme mode (dark mode, light mode)
-  color: string; // theme color
-  mode: ThemeMode['key']; // Menu modes (side mode, top mode, mixed mode)
-  colorWeak: boolean; // color blindness
-  greyTheme: boolean; // gray mode
-  fixedHead: boolean; // fixed head
-  splitNav: boolean; // Whether to split the menu (only takes effect when the menu mode is mixed mode)
-  fixedLeftNav: boolean; // fixed left menu
-  isShowTab: boolean; // Whether to display multiple tabs
-  fixedTab: boolean; // Fixed tab page
-  hasTopArea: boolean; // Whether to display the top area
-  hasFooterArea: boolean; // Whether to display the bottom area
-  hasNavArea: boolean; // Is there a menu
-  hasNavHeadArea: boolean; // Does the menu have a menu header?
-}
+import { ThemeOption } from '../../types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
+  private windowServicevice: WindowService = inject(WindowService);
+
   private isNightTheme$ = new BehaviorSubject<boolean>(false);
   private isOverModeTheme$ = new BehaviorSubject<boolean>(false);
-  private themesMode$ = new BehaviorSubject<SettingInterface>({
-    theme: 'dark',
-    color: '#1890FF',
-    mode: 'side',
-    isShowTab: true,
-    colorWeak: false,
-    greyTheme: false,
-    splitNav: false,
-    fixedTab: true,
-    fixedHead: true,
-    fixedLeftNav: true,
-    hasTopArea: true,
-    hasFooterArea: true,
-    hasNavArea: true,
-    hasNavHeadArea: true
-  });
+  private themeMode$ = new BehaviorSubject<ThemeOption>(InitTheme);
 
   private isCollapsed$ = new BehaviorSubject<boolean>(false);
 
   constructor() {}
 
-  // Get theme parameters
-  setThemesMode(mode: SettingInterface): void {
-    this.themesMode$.next(mode);
+  // Get theme options
+  getThemeOptionStorage(): ThemeOption {
+    const themeOption = this.windowServicevice.getStorage(ThemeOptionKey) || '';
+    return JSON.parse(themeOption);
   }
 
-  getThemesMode(): Observable<SettingInterface> {
-    return this.themesMode$.asObservable();
+  // Get theme parameters
+  setThemeMode(mode: ThemeOption): void {
+    this.themeMode$.next(mode);
+  }
+
+  getThemeMode(): Observable<ThemeOption> {
+    return this.themeMode$.asObservable();
   }
 
   // Whether the theme is a dark theme
@@ -81,5 +60,23 @@ export class ThemeService {
 
   getIsCollapsed(): Observable<boolean> {
     return this.isCollapsed$.asObservable();
+  }
+
+  // TODO: Theme Custom for each module
+  public get themeOptionStorage(): ThemeOption {
+    const themeOption: ThemeOption = JSON.parse(this.windowServicevice.getStorage(ThemeOptionKey) as string);
+    console.warn('ThemeOption: ', themeOption);
+    return themeOption;
+  }
+
+  public setThemeOptionStorage(themeOption: ThemeOption): void {
+    console.warn('NewTheme: ', themeOption);
+
+    this.removeThemeOptionStorage();
+    this.windowServicevice.setStorage(ThemeOptionKey, JSON.stringify(themeOption));
+  }
+
+  public removeThemeOptionStorage(): void {
+    this.windowServicevice.removeStorage(ThemeOptionKey);
   }
 }

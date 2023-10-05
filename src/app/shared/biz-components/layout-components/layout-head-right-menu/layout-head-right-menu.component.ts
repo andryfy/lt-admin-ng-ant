@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
 import { WindowService } from '@core/services/common/window.service';
-import { AccountService, UserPsd } from '@services/system/account.service';
+import { AccountService, UserPassword } from '@http/system/account.service';
 import { ScreenLessHiddenDirective } from '@shared/directives/screen-less-hidden.directive';
 import { ToggleFullscreenDirective } from '@shared/directives/toggle-fullscreen.directive';
 import { SpinService } from '@store/common-store/spin.service';
@@ -45,7 +45,7 @@ import { HomeNoticeComponent } from '../home-notice/home-notice.component';
   ]
 })
 export class LayoutHeadRightMenuComponent implements OnInit {
-  user!: UserPsd;
+  user!: UserPassword;
 
   constructor(
     private router: Router,
@@ -53,7 +53,7 @@ export class LayoutHeadRightMenuComponent implements OnInit {
     private spinService: SpinService,
     private loginOutService: LoginInOutService,
     private lockWidgetService: LockWidgetService,
-    private windowServe: WindowService,
+    private windowServicevice: WindowService,
     private activatedRoute: ActivatedRoute,
     private searchRouteService: SearchRouteService,
     public message: NzMessageService,
@@ -110,8 +110,8 @@ export class LayoutHeadRightMenuComponent implements OnInit {
   }
 
   clean(): void {
-    this.windowServe.clearStorage();
-    this.windowServe.clearSessionStorage();
+    this.windowServicevice.clearStorage();
+    this.windowServicevice.clearSessionStorage();
     this.loginOutService.loginOut().then();
     this.message.success('Cleared successfully, please log in again');
   }

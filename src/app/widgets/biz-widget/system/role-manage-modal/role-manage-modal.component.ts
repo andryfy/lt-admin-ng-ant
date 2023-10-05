@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/cor
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
-import { Role } from '@services/system/role.service';
+import { Role } from '@http/system/role.service';
 import { fnCheckForm } from '@utils/tools';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzFormModule } from 'ng-zorro-antd/form';

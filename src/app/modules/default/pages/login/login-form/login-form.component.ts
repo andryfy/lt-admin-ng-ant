@@ -38,7 +38,7 @@ export class LoginFormComponent implements OnInit {
     private menuService: MenuStoreService,
     private dataService: LoginService,
     private spinService: SpinService,
-    private windowServe: WindowService,
+    private windowServicevice: WindowService,
     private userInfoService: UserInfoService,
     private notification: NzNotificationService,
     private router: Router

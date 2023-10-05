@@ -1,6 +1,6 @@
 /*
 Instructions:
-accidentTypeOptions: OptionsInterface[];
+accidentTypeOptions: OptionInterface[];
 this.accidentTypeOptions = [...MapPipe.transformMapToArray(MapSet.accidentType)];
 */
 

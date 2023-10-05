@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { TabModel, TabService } from '@core/services/common/tab.service';
-import { Menu } from '@core/services/types';
+import { MenuOption } from '@core/services/types';
 import { MouseHoverShowDirective } from '@shared/directives/mouse-hover-show.directive';
 import { SplitNavStoreService } from '@store/common-store/split-nav-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
@@ -30,18 +30,18 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 export class TabComponent implements OnInit {
   tabsSourceData: TabModel[] = [];
   tabsSourceData$ = this.tabService.getTabArray$();
-  themesOptions$ = this.themesService.getThemesMode();
-  isNightTheme$ = this.themesService.getIsNightTheme();
-  leftMenuArray$: Observable<Menu[]> = this.splitNavStoreService.getSplitLeftNavArrayStore();
-  isOverMode$ = this.themesService.getIsOverMode();
-  isCollapsed$ = this.themesService.getIsCollapsed();
+  themeOption$ = this.themeService.getThemeMode();
+  isNightTheme$ = this.themeService.getIsNightTheme();
+  leftMenuArray$: Observable<MenuOption[]> = this.splitNavStoreService.getSplitLeftNavArrayStore();
+  isOverMode$ = this.themeService.getIsOverMode();
+  isCollapsed$ = this.themeService.getIsCollapsed();
   destroyRef = inject(DestroyRef);
 
   constructor(
     public tabService: TabService,
     private nzContextMenuService: NzContextMenuService,
     private splitNavStoreService: SplitNavStoreService,
-    private themesService: ThemeService,
+    private themeService: ThemeService,
     public router: Router,
     public cdr: ChangeDetectorRef
   ) {

@@ -3,7 +3,7 @@ import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/cor
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
-import { MenuListObj } from '@services/system/menus.service';
+import { MenuOption } from '@app/core/services/http/system/menu.service';
 import { IconSelComponent } from '@shared/biz-components/icon-sel/icon-sel.component';
 import { fnCheckForm } from '@utils/tools';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -28,7 +28,7 @@ type menuType = 'C' | 'F';
 export class MenuModalComponent implements OnInit {
   validateForm!: FormGroup;
   selIconVisible = false;
-  readonly nzModalData: MenuListObj = inject(NZ_MODAL_DATA);
+  readonly nzModalData: MenuOption = inject(NZ_MODAL_DATA);
   menuType: menuType = 'C';
 
   constructor(private modalRef: NzModalRef, private fb: FormBuilder) {}

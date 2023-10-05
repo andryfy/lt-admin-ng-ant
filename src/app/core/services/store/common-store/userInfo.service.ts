@@ -16,7 +16,7 @@ export class UserInfoService {
 
   constructor() {}
 
-  parsToken(token: string): UserInfo {
+  parseToken(token: string): UserInfo {
     const helper = new JwtHelperService();
     try {
       const { rol, userId } = helper.decodeToken(token);

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { fromEvent, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 
-import { Menu } from '@core/services/types';
+import { MenuOption } from '@core/services/types';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { ThemeService } from '@store/common-store/theme.service';
 import { BasicConfirmModalComponent } from '@widgets/base-modal';
@@ -39,15 +39,15 @@ const passiveEventListenerOptions = <AddEventListenerOptions>normalizePassiveLis
   imports: [NzButtonModule, NzInputModule, FormsModule, NgIf, NzIconModule, NzEmptyModule, NgFor, NzGridModule, NzDividerModule]
 })
 export class SearchRouteComponent extends BasicConfirmModalComponent implements OnInit, AfterViewInit {
-  isNightTheme$ = this.themesService.getIsNightTheme();
+  isNightTheme$ = this.themeService.getIsNightTheme();
   resultListShow: ResultItem[] = [];
   resultList: ResultItem[] = [];
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
   inputValue: string | null = null;
-  menuNavList: Menu[] = [];
+  menuNavList: MenuOption[] = [];
   destroyRef = inject(DestroyRef);
   constructor(
-    private themesService: ThemeService,
+    private themeService: ThemeService,
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone,
     private menuStoreService: MenuStoreService,
@@ -108,7 +108,7 @@ export class SearchRouteComponent extends BasicConfirmModalComponent implements 
     this.modalRef.destroy();
   }
 
-  getResultItem(menu: Menu, fatherTitle: string = ''): ResultItem[] {
+  getResultItem(menu: MenuOption, fatherTitle: string = ''): ResultItem[] {
     const fatherTitleTemp = fatherTitle === '' ? menu.menuName : `${fatherTitle} > ${menu.menuName}`;
     let resultItem: ResultItem = {
       title: fatherTitleTemp,

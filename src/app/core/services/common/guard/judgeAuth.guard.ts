@@ -9,7 +9,7 @@ import { UserInfoService } from '@store/common-store/userInfo.service';
 import { fnGetUUID } from '@utils/tools';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
-import { Menu } from '../../types';
+import { MenuOption } from '../../types';
 import { WindowService } from '../window.service';
 
 // If you are interested, you can take a look at the controversy between class and fn https://github.com/angular/angular/pull/47924
@@ -20,8 +20,8 @@ import { WindowService } from '../window.service';
 })
 export class JudgeAuthGuardService {
   authCodeArray: string[] = [];
-  selMenu: Menu | null = null;
-  menuNavList: Menu[] = [];
+  selMenu: MenuOption | null = null;
+  menuNavList: MenuOption[] = [];
   destroyRef = inject(DestroyRef);
 
   constructor(
@@ -41,7 +41,7 @@ export class JudgeAuthGuardService {
   }
 
   // Save the current menu to this.selMenu
-  getMenu(menu: Menu[], url: string): void {
+  getMenu(menu: MenuOption[], url: string): void {
     for (let i = 0; i < menu.length; i++) {
       if (url === menu[i].path) {
         this.selMenu = menu[i];

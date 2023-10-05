@@ -18,7 +18,7 @@ const enum ThemeType {
 export class ThemeSkinService {
   currentTheme!: ThemeType;
 
-  constructor(private themesService: ThemeService, @Inject(DOCUMENT) private doc: NzSafeAny) {}
+  constructor(private themeService: ThemeService, @Inject(DOCUMENT) private doc: NzSafeAny) {}
 
   reverseTheme(theme: ThemeType): ThemeType {
     return theme === ThemeType.dark ? ThemeType.default : ThemeType.dark;
@@ -46,7 +46,7 @@ export class ThemeSkinService {
 
   public loadTheme(isFirstLoad = true): Promise<Event> {
     if (isFirstLoad) {
-      this.themesService
+      this.themeService
         .getIsNightTheme()
         .pipe(first())
         .subscribe(res => {

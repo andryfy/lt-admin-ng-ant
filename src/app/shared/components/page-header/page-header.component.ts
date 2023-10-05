@@ -28,9 +28,9 @@ export class PageHeaderComponent implements OnInit {
   @Input() backTpl: TemplateRef<NzSafeAny> | undefined;
   @Input() pageHeaderInfo: Partial<PageHeaderType> = {};
   @Input() backUrl = '';
-  themesOptions$ = this.themesService.getThemesMode();
+  themeOption$ = this.themeService.getThemeMode();
 
-  constructor(private themesService: ThemeService, private router: Router) {}
+  constructor(private themeService: ThemeService, private router: Router) {}
 
   back(): void {
     this.router.navigateByUrl(this.backUrl);

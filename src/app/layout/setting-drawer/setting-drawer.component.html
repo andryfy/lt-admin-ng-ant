@@ -9,7 +9,7 @@
 </div>
 <nz-drawer [nzClosable]="false" [nzWidth]="300" [(nzVisible)]="isCollapsed" (nzOnClose)="isCollapsed = !isCollapsed">
   <ng-container *nzDrawerContent>
-    <div *ngIf="_themesOptions.mode !== 'mixi'" class="m-b-24">
+    <div *ngIf="_themeOption.mode !== 'mixi'" class="m-b-24">
       <h3 class="title">Overall Style Settings</h3>
       <div class="block-checkbox">
         <div *ngFor="let theme of themes" class="item" nz-tooltip [nzTooltipTitle]="theme.title" (click)="changeTheme(theme)">
@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="m-b-24 theme-color" [class.m-t-25]="_themesOptions.mode !== 'mixi'">
+    <div class="m-b-24 theme-color" [class.m-t-25]="_themeOption.mode !== 'mixi'">
       <h3 class="title">Theme Color</h3>
       <div class="content">
         <div *ngFor="let color of colors" class="color-block" nz-tooltip [nzTooltipTitle]="color.title" [style.background]="color.color" (click)="changePrimaryColor(color)">
@@ -46,34 +46,34 @@
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedTabAction]">Fixed tab</nz-list-item>
       <ng-template #fixedTabAction>
-        <nz-switch nzSize="small" [ngModel]="_themesOptions.fixedTab" [nzDisabled]="!_themesOptions.fixedHead" (ngModelChange)="changeFixed($event, 'fixedTab')" />
+        <nz-switch nzSize="small" [ngModel]="_themeOption.fixedTab" [nzDisabled]="!_themeOption.fixedHead" (ngModelChange)="changeFixed($event, 'fixedTab')" />
       </ng-template>
     </nz-list>
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedHeadAction]">Fixed Head</nz-list-item>
       <ng-template #fixedHeadAction>
-        <nz-switch nzSize="small" [ngModel]="_themesOptions.fixedHead" (ngModelChange)="changeFixed($event, 'fixedHead')" />
+        <nz-switch nzSize="small" [ngModel]="_themeOption.fixedHead" (ngModelChange)="changeFixed($event, 'fixedHead')" />
       </ng-template>
     </nz-list>
 
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[fixedLeftNavAction]">Fixed sidebar</nz-list-item>
       <ng-template #fixedLeftNavAction>
-        <nz-switch nzSize="small" [ngModel]="_themesOptions.fixedLeftNav" (ngModelChange)="changeFixed($event, 'fixedLeftNav')" />
+        <nz-switch nzSize="small" [ngModel]="_themeOption.fixedLeftNav" (ngModelChange)="changeFixed($event, 'fixedLeftNav')" />
       </ng-template>
     </nz-list>
 
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[isShowTabTpl]">Multiple tabs</nz-list-item>
       <ng-template #isShowTabTpl>
-        <nz-switch nzSize="small" [ngModel]="_themesOptions.isShowTab" (ngModelChange)="changeFixed($event, 'isShowTab')" />
+        <nz-switch nzSize="small" [ngModel]="_themeOption.isShowTab" (ngModelChange)="changeFixed($event, 'isShowTab')" />
       </ng-template>
     </nz-list>
 
     <nz-list [nzSplit]="false">
       <nz-list-item [nzActions]="[splitNavAction]">Automatically split menu</nz-list-item>
       <ng-template #splitNavAction>
-        <nz-switch nzSize="small" [ngModel]="_themesOptions.splitNav" (ngModelChange)="changeFixed($event, 'splitNav')" />
+        <nz-switch nzSize="small" [ngModel]="_themeOption.splitNav" (ngModelChange)="changeFixed($event, 'splitNav')" />
       </ng-template>
     </nz-list>
 
@@ -84,25 +84,25 @@
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[topAreaAction]">Top Bar</nz-list-item>
         <ng-template #topAreaAction>
-          <nz-switch nzSize="small" [ngModel]="_themesOptions.hasTopArea" (ngModelChange)="changeFixed($event, 'hasTopArea')" />
+          <nz-switch nzSize="small" [ngModel]="_themeOption.hasTopArea" (ngModelChange)="changeFixed($event, 'hasTopArea')" />
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[footerAreaAction]">Footer</nz-list-item>
         <ng-template #footerAreaAction>
-          <nz-switch nzSize="small" [ngModel]="_themesOptions.hasFooterArea" (ngModelChange)="changeFixed($event, 'hasFooterArea')" />
+          <nz-switch nzSize="small" [ngModel]="_themeOption.hasFooterArea" (ngModelChange)="changeFixed($event, 'hasFooterArea')" />
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[navAreaAction]">Menu</nz-list-item>
         <ng-template #navAreaAction>
-          <nz-switch nzSize="small" [ngModel]="_themesOptions.hasNavArea" (ngModelChange)="changeFixed($event, 'hasNavArea')" />
+          <nz-switch nzSize="small" [ngModel]="_themeOption.hasNavArea" (ngModelChange)="changeFixed($event, 'hasNavArea')" />
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[navHeadAreaAction]">Menu header</nz-list-item>
         <ng-template #navHeadAreaAction>
-          <nz-switch nzSize="small" [ngModel]="_themesOptions.hasNavHeadArea" (ngModelChange)="changeFixed($event, 'hasNavHeadArea')" />
+          <nz-switch nzSize="small" [ngModel]="_themeOption.hasNavHeadArea" (ngModelChange)="changeFixed($event, 'hasNavHeadArea')" />
         </ng-template>
       </nz-list>
     </div>
@@ -120,13 +120,13 @@
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[otherAction]">Color Weakness Mode</nz-list-item>
         <ng-template #otherAction>
-          <nz-switch nzSize="small" [ngModel]="_themesOptions.colorWeak" (ngModelChange)="changeSpecialTheme($event, 'color-weak')" />
+          <nz-switch nzSize="small" [ngModel]="_themeOption.colorWeak" (ngModelChange)="changeSpecialTheme($event, 'color-weak')" />
         </ng-template>
       </nz-list>
       <nz-list [nzSplit]="false">
         <nz-list-item [nzActions]="[greyAction]">Gray Mode</nz-list-item>
         <ng-template #greyAction>
-          <nz-switch nzSize="small" [ngModel]="_themesOptions.greyTheme" (ngModelChange)="changeSpecialTheme($event, 'grey-theme')" />
+          <nz-switch nzSize="small" [ngModel]="_themeOption.greyTheme" (ngModelChange)="changeSpecialTheme($event, 'grey-theme')" />
         </ng-template>
       </nz-list>
     </div>

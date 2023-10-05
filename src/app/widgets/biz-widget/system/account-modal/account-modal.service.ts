@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { User } from '@services/system/account.service';
+import { User } from '@http/system/account.service';
 import { ModalWrapService } from '@widgets/base-modal';
 import { AccountModalComponent } from '@widgets/biz-widget/system/account-modal/account-modal.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';

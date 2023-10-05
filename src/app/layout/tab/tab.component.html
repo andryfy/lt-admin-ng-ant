@@ -1,5 +1,5 @@
 <!--Non-fixed tab mode-->
-<nz-card *ngIf="!(themesOptions$ | async)?.fixedTab; else fixTabTpl" id="multi-tab" class="m-t-10" style="height: 35px" [nzBodyStyle]="{ padding: 0 }" [nzBordered]="false">
+<nz-card *ngIf="!(themeOption$ | async)?.fixedTab; else fixTabTpl" id="multi-tab" class="m-t-10" style="height: 35px" [nzBodyStyle]="{ padding: 0 }" [nzBordered]="false">
   <nz-tabset [nzHideAdd]="true" [nzSelectedIndex]="currentIndex" [nzTabBarStyle]="{ height: '35px' }" [nzTabPosition]="'top'" [nzType]="'editable-card'" (nzClose)="clickCloseIcon($event)">
     <nz-tab *ngFor="let tab of tabsSourceData$ | async; let i = index; trackBy: trackByTab" nzClosable [nzTitle]="tab.title" (nzClick)="goPage(tab)" (nzContextmenu)="contextMenu($event, menu)">
       <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -23,11 +23,11 @@
       'fixed-collapsed': (isCollapsed$ | async),
       'fixed-over-mode':
         (isOverMode$ | async) ||
-        !(themesOptions$ | async)!.hasNavArea ||
-        (themesOptions$ | async)?.mode === 'top' ||
-        ((themesOptions$ | async)?.mode === 'mixi' && (leftMenuArray$ | async)!.length === 0 && (themesOptions$ | async)?.splitNav)
+        !(themeOption$ | async)!.hasNavArea ||
+        (themeOption$ | async)?.mode === 'top' ||
+        ((themeOption$ | async)?.mode === 'mixi' && (leftMenuArray$ | async)!.length === 0 && (themeOption$ | async)?.splitNav)
     }"
-    [ngStyle]="{ top: (themesOptions$ | async)!.hasTopArea ? '48px' : '0', left: !(themesOptions$ | async)!.hasNavArea ? '0' : '' }"
+    [ngStyle]="{ top: (themeOption$ | async)!.hasTopArea ? '48px' : '0', left: !(themeOption$ | async)!.hasNavArea ? '0' : '' }"
     [nzBodyStyle]="{ padding: 0 }"
     [nzBordered]="true"
   >

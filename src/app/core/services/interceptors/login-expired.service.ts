@@ -25,7 +25,7 @@ export class LoginExpiredService implements HttpInterceptor {
     private loginInOutService: LoginInOutService,
     private zone: NgZone,
     private message: NzMessageService,
-    private windowServe: WindowService,
+    private windowServicevice: WindowService,
     private http: HttpClient
   ) {}
 
@@ -40,7 +40,7 @@ export class LoginExpiredService implements HttpInterceptor {
   private sendRequest(request: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<NzSafeAny> | null {
     return this.refresher!.pipe(
       switchMap(() => {
-        const token = this.windowServe.getSessionStorage(TokenKey);
+        const token = this.windowServicevice.getSessionStorage(TokenKey);
         let httpConfig = {};
         if (!!token) {
           httpConfig = { headers: request.headers.set(TokenKey, token) };

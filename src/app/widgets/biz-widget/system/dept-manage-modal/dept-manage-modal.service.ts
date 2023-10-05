@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Dept } from '@services/system/dept.service';
+import { Dept } from '@http/system/dept.service';
 import { ModalWrapService } from '@widgets/base-modal';
 import { DeptManageModalComponent } from '@widgets/biz-widget/system/dept-manage-modal/dept-manage-modal.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';

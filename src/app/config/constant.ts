@@ -1,13 +1,17 @@
-/*define constant*/
+/* Define constant */
+
+import { ThemeOption } from '@app/core/services/types';
 
 // The prefix of the request header token
-export const TokenPre = 'Bearer ';
-// tokenKey
+export const TokenPrefix = 'Bearer ';
+// Token Key
 export const TokenKey = 'Authorization';
 // Is it a dark mode key
 export const IsNightKey = 'IsNightKey';
-// theme setting key
-export const ThemeOptionsKey = 'ThemeOptionsKey';
+// Module setting key
+export const ModuleOptionKey = 'ModuleOption';
+// Theme setting key
+export const ThemeOptionKey = 'ThemeOptionKey';
 // Used to record whether it is loaded for the first time
 export const IsFirstLogin = 'IsFirstLogin';
 // Lock screen key
@@ -24,3 +28,21 @@ export const tokenErrorCode = 1010;
 export const SideCollapsedMaxWidth = 700;
 // The top menu becomes the maximum width of over mode
 export const TopCollapsedMaxWidth = 1244;
+
+// Default theme value
+export const InitTheme: ThemeOption = {
+  theme: 'dark',
+  color: '#1890FF',
+  mode: 'side',
+  isShowTab: true,
+  colorWeak: false,
+  greyTheme: false,
+  splitNav: false,
+  fixedTab: true,
+  fixedHead: true,
+  fixedLeftNav: true,
+  hasTopArea: true,
+  hasFooterArea: true,
+  hasNavArea: true,
+  hasNavHeadArea: true
+};

@@ -1,8 +1,8 @@
-<div class="left-nav-wrap" [class.dark-scrollbar]="(themesOptions$ | async)!.theme === 'dark'">
-  <div *ngIf="(themesOptions$ | async)!.hasNavHeadArea" class="sidebar-logo" [class.p-l-8]="isCollapsed$ | async">
+<div class="left-nav-wrap" [class.dark-scrollbar]="(themeOption$ | async)!.theme === 'dark'">
+  <div *ngIf="(themeOption$ | async)!.hasNavHeadArea" class="sidebar-logo" [class.p-l-8]="isCollapsed$ | async">
     <a href="#" target="_blank">
-      <img alt="logo" src="assets/imgs/logo.svg" />
-      <h1 class="animate-02" [class.light]="(themesOptions$ | async)!.theme === 'light' && (isNightTheme$ | async) === false">LT Admin</h1>
+      <img alt="logo" src="/assets/imgs/logo.svg" />
+      <h1 class="animate-02" [class.light]="(themeOption$ | async)!.theme === 'light' && (isNightTheme$ | async) === false">LT Admin</h1>
     </a>
   </div>
   <div class="nav-ul-wrap">

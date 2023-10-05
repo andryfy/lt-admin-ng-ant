@@ -34,7 +34,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   public static waitDelete: string | null;
 
   // Whether there are multiple tabs. If there are no multiple tabs, route caching will not be done.
-  isShowTab$ = inject(ThemeService).getThemesMode();
+  isShowTab$ = inject(ThemeService).getThemeMode();
 
   public static deleteRouteSnapshot(key: string): void {
     if (SimpleReuseStrategy.handlers[key]) {

@@ -11,18 +11,18 @@ import { fnDecrypt, fnEncrypt } from '@utils/tools';
   providedIn: 'root'
 })
 export class SubLockedStatusService {
-  constructor(private windowSer: WindowService, private lockScreenStoreService: LockScreenStoreService) {}
+  constructor(private windowService: WindowService, private lockScreenStoreService: LockScreenStoreService) {}
 
   initLockedStatus(): void {
     // Determine whether there is a cache
-    const hasCash = this.windowSer.getSessionStorage(LockedKey);
+    const hasCash = this.windowService.getSessionStorage(LockedKey);
     if (hasCash) {
       this.lockScreenStoreService.setLockScreenStore(fnDecrypt(hasCash, salt));
     } else {
       this.lockScreenStoreService
         .getLockScreenStore()
         .pipe(first())
-        .subscribe(res => this.windowSer.setSessionStorage(LockedKey, fnEncrypt(JSON.stringify(res), salt)));
+        .subscribe(res => this.windowService.setSessionStorage(LockedKey, fnEncrypt(JSON.stringify(res), salt)));
     }
   }
 }

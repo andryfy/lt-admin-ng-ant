@@ -3,11 +3,11 @@ import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/cor
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
-import { OptionsInterface } from '@core/services/types';
+import { OptionInterface } from '@core/services/types';
 import { ValidatorsService } from '@core/services/validators/validators.service';
-import { User } from '@services/system/account.service';
-import { DeptService } from '@services/system/dept.service';
-import { RoleService } from '@services/system/role.service';
+import { User } from '@http/system/account.service';
+import { DeptService } from '@http/system/dept.service';
+import { RoleService } from '@http/system/role.service';
 import { fnCheckForm } from '@utils/tools';
 import { fnAddTreeDataGradeAndLeaf, fnFlatDataHasParentToTree } from '@utils/treeTableTools';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/core/tree';
@@ -31,7 +31,7 @@ import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 export class AccountModalComponent implements OnInit {
   addEditForm!: FormGroup;
   readonly nzModalData: User = inject(NZ_MODAL_DATA);
-  roleOptions: OptionsInterface[] = [];
+  roleOptions: OptionInterface[] = [];
   isEdit = false;
   value?: string;
   deptNodes: NzTreeNodeOptions[] = [];
@@ -56,7 +56,7 @@ export class AccountModalComponent implements OnInit {
       this.roleService.getRoles({ pageNum: 0, pageSize: 0 }).subscribe(({ list }) => {
         this.roleOptions = [];
         list.forEach(({ id, roleName }) => {
-          const obj: OptionsInterface = {
+          const obj: OptionInterface = {
             label: roleName,
             value: id!
           };

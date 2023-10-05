@@ -20,10 +20,10 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 })
 export class FooterSubmitComponent implements OnInit {
   @Input() leftTpl: TemplateRef<NzSafeAny> | undefined;
-  themesOptions$ = this.themesService.getThemesMode();
-  isNightTheme$ = this.themesService.getIsNightTheme();
-  isCollapsed$ = this.themesService.getIsCollapsed();
-  isOverMode$ = this.themesService.getIsOverMode();
+  themeOption$ = this.themeService.getThemeMode();
+  isNightTheme$ = this.themeService.getIsNightTheme();
+  isCollapsed$ = this.themeService.getIsCollapsed();
+  isOverMode$ = this.themeService.getIsOverMode();
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
   isCollapsed = false;
   isOverMode = false;
@@ -33,7 +33,7 @@ export class FooterSubmitComponent implements OnInit {
   isMixMode = false;
   destroyRef = inject(DestroyRef);
 
-  constructor(private splitNavStoreService: SplitNavStoreService, private themesService: ThemeService, private rd2: Renderer2, private el: ElementRef) {}
+  constructor(private splitNavStoreService: SplitNavStoreService, private themeService: ThemeService, private rd2: Renderer2, private el: ElementRef) {}
 
   setWidth(width: number): void {
     const dom = this.el.nativeElement.querySelector('.ant-pro-footer-bar');
@@ -41,11 +41,11 @@ export class FooterSubmitComponent implements OnInit {
   }
 
   subTheme(): void {
-    const sub1$ = this.themesOptions$.pipe(
-      tap(themesOptions => {
-        this.hasLeftNav = themesOptions.hasNavArea;
-        this.isTopMode = themesOptions.mode === 'top';
-        this.isMixMode = themesOptions.mode === 'mixi';
+    const sub1$ = this.themeOption$.pipe(
+      tap(themeOption => {
+        this.hasLeftNav = themeOption.hasNavArea;
+        this.isTopMode = themeOption.mode === 'top';
+        this.isMixMode = themeOption.mode === 'mixi';
       })
     );
     const sub2$ = this.isCollapsed$.pipe(

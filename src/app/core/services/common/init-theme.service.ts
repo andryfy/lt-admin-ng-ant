@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { IsNightKey, ThemeOptionsKey } from '@config/constant';
+import { IsNightKey, ThemeOptionKey } from '@config/constant';
 import { ThemeService } from '@store/common-store/theme.service';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 import { WindowService } from './window.service';
 
-type setThemeProp = 'setIsNightTheme' | 'setThemesMode';
-type getThemeProp = 'getIsNightTheme' | 'getThemesMode';
+type setThemeProp = 'setIsNightTheme' | 'setThemeMode';
+type getThemeProp = 'getIsNightTheme' | 'getThemeMode';
 
-interface InitThemeOption {
+interface ThemeInitOption {
   storageKey: string;
   setMethodName: setThemeProp;
   getMethodName: getThemeProp;
@@ -24,29 +24,29 @@ interface InitThemeOption {
   providedIn: 'root'
 })
 export class InitThemeService {
-  themeInitOption: InitThemeOption[] = [
+  themeInitOption: ThemeInitOption[] = [
     {
       storageKey: IsNightKey,
       setMethodName: 'setIsNightTheme',
       getMethodName: 'getIsNightTheme'
     },
     {
-      storageKey: ThemeOptionsKey,
-      setMethodName: 'setThemesMode',
-      getMethodName: 'getThemesMode'
+      storageKey: ThemeOptionKey,
+      setMethodName: 'setThemeMode',
+      getMethodName: 'getThemeMode'
     }
   ];
 
-  constructor(private themesService: ThemeService, private windowServe: WindowService) {}
+  constructor(private themeService: ThemeService, private windowServicevice: WindowService) {}
 
   initTheme(): Promise<void> {
     return new Promise(resolve => {
       this.themeInitOption.forEach(item => {
-        const hasCash = this.windowServe.getStorage(item.storageKey);
+        const hasCash = this.windowServicevice.getStorage(item.storageKey);
         if (hasCash) {
-          this.themesService[item.setMethodName](JSON.parse(hasCash));
+          this.themeService[item.setMethodName](JSON.parse(hasCash));
         } else {
-          (this.themesService[item.getMethodName]() as Observable<NzSafeAny>).pipe(first()).subscribe(res => this.windowServe.setStorage(item.storageKey, JSON.stringify(res)));
+          (this.themeService[item.getMethodName]() as Observable<NzSafeAny>).pipe(first()).subscribe(res => this.windowServicevice.setStorage(item.storageKey, JSON.stringify(res)));
         }
       });
       return resolve();

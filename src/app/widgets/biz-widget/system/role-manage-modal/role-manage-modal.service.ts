@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Role } from '@services/system/role.service';
+import { Role } from '@http/system/role.service';
 import { ModalWrapService } from '@widgets/base-modal';
 import { RoleManageModalComponent } from '@widgets/biz-widget/system/role-manage-modal/role-manage-modal.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';

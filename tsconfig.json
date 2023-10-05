@@ -24,17 +24,19 @@
       "dom"
     ],
     "paths": {
-      "@app/*": ["src/app/*"],
       "@app": ["src/app"],
+      "@app/*": ["src/app/*"],
       "@store/*": ["src/app/core/services/store/*"],
       "@config/*": ["src/app/config/*"],
-      "@core/*": ["src/app/core/*"],
-      "@services/*": ["src/app/core/services/http/*"],
       "@utils/*": ["src/app/utils/*"],
       "@widgets/*": ["src/app/widgets/*"],
       "@env/*": ["src/environments/*"],
+      "@assets/*": ["src/assets/*"],
+      "@service/*": ["src/app/core/services/*"],
+      "@http/*": ["src/app/core/services/http/*"],
+      "@core/*": ["src/app/core/*"],
       "@shared/*": ["src/app/shared/*"],
-      "@assets/*": ["src/assets/*"]
+      "@default/*": ["src/app/modules/default/*"],
     },
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true

@@ -12,12 +12,8 @@ export default [
     data: { shouldDetach: 'no', preload: true },
     canActivateChild: [JudgeLoginGuard, JudgeAuthGuard],
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      {
-        path: 'dashboard',
-        data: { preload: true },
-        loadChildren: () => import('@app/pages/dashboard/dashboard-routing')
-      }
+      { path: '', redirectTo: 'default', pathMatch: 'full' },
+      { path: 'default', data: { preload: true }, loadChildren: () => import('@default/default.module').then(m => m.DefaultModule) }
     ]
   }
 ] as Route[];

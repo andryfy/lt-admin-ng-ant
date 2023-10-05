@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { ActionCode } from '@config/actionCode';
-import { TokenKey, TokenPre } from '@config/constant';
+import { TokenKey, TokenPrefix } from '@config/constant';
 import { SimpleReuseStrategy } from '@core/services/common/reuse-strategy';
 import { TabService } from '@core/services/common/tab.service';
 import { WindowService } from '@core/services/common/window.service';
-import { Menu } from '@core/services/types';
-import { LoginService } from '@services/login/login.service';
+import { MenuOption } from '@core/services/types';
+import { LoginService } from '@http/login/login.service';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
 import { UserInfo, UserInfoService } from '@store/common-store/userInfo.service';
 import { fnFlatDataHasParentToTree } from '@utils/treeTableTools';
@@ -31,11 +31,11 @@ export class LoginInOutService {
     private router: Router,
     private userInfoService: UserInfoService,
     private menuService: MenuStoreService,
-    private windowServe: WindowService
+    private windowServicevice: WindowService
   ) {}
 
   // Get the menu array by user ID
-  getMenuByUserId(userId: number): Observable<Menu[]> {
+  getMenuByUserId(userId: number): Observable<MenuOption[]> {
     return this.loginService.getMenuByUserId(userId);
   }
 
@@ -43,9 +43,9 @@ export class LoginInOutService {
     return new Promise(resolve => {
       // Cache the token persistently. Please note that if there is no cache, it will be intercepted in the route guard and the route will not be allowed to jump.
       // This route is guarded at src/app/core/services/common/guard/judgeLogin.guard.ts
-      this.windowServe.setSessionStorage(TokenKey, TokenPre + token);
+      this.windowServicevice.setSessionStorage(TokenKey, TokenPrefix + token);
       // Parse the token and get user information
-      const userInfo: UserInfo = this.userInfoService.parsToken(TokenPre + token);
+      const userInfo: UserInfo = this.userInfoService.parseToken(TokenPrefix + token);
       // TODO: Here is the permission to manually add the button to open the details in the static page tab operation, because they involve routing jumps, and they will be guarded by walking, but the permissions are not managed by the backend, so the following two lines manually add permissions,
       // In actual operation, you can delete the following 2 lines
       userInfo.authCode.push(ActionCode.TabsDetail);
@@ -87,7 +87,7 @@ export class LoginInOutService {
 
   clearSessionCash(): Promise<void> {
     return new Promise(resolve => {
-      this.windowServe.removeSessionStorage(TokenKey);
+      this.windowServicevice.removeSessionStorage(TokenKey);
       this.menuService.setMenuArrayStore([]);
       resolve();
     });

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { MenuListObj } from '@services/system/menus.service';
+import { MenuOption } from '@app/core/services/http/system/menu.service';
 import { ModalWrapService } from '@widgets/base-modal';
 import { MenuModalComponent } from '@widgets/biz-widget/system/menu-modal/menu-modal.component';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
@@ -16,7 +16,7 @@ export class MenuModalService {
     return MenuModalComponent;
   }
 
-  public show(modalOptions: ModalOptions = {}, modalData?: MenuListObj): Observable<NzSafeAny> {
+  public show(modalOptions: ModalOptions = {}, modalData?: MenuOption): Observable<NzSafeAny> {
     return this.modalWrapService.show(this.getContentComponent(), modalOptions, modalData);
   }
 }

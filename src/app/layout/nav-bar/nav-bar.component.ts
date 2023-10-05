@@ -8,7 +8,7 @@ import { filter, map, mergeMap, share, switchMap, tap } from 'rxjs/operators';
 
 import { ThemeMode } from '@app/layout/setting-drawer/setting-drawer.component';
 import { TabService } from '@core/services/common/tab.service';
-import { Menu } from '@core/services/types';
+import { MenuOption } from '@core/services/types';
 import { AuthDirective } from '@shared/directives/auth.directive';
 import { TrackByPropertyDirective } from '@shared/directives/track-by-property.directive';
 import { MenuStoreService } from '@store/common-store/menu-store.service';
@@ -34,20 +34,20 @@ export class NavBarComponent implements OnInit {
   @Input({ transform: booleanAttribute })
   isMixiLeft = false;
 
-  themesOptions$ = this.themesService.getThemesMode();
-  isNightTheme$ = this.themesService.getIsNightTheme();
-  isCollapsed$ = this.themesService.getIsCollapsed();
-  isOverMode$ = this.themesService.getIsOverMode();
+  themeOption$ = this.themeService.getThemeMode();
+  isNightTheme$ = this.themeService.getIsNightTheme();
+  isCollapsed$ = this.themeService.getIsCollapsed();
+  isOverMode$ = this.themeService.getIsOverMode();
   leftMenuArray$ = this.splitNavStoreService.getSplitLeftNavArrayStore();
 
   routerPath = this.router.url;
-  themesMode: ThemeMode['key'] = 'side';
+  themeMode: ThemeMode['key'] = 'side';
   isOverMode = false;
   isCollapsed = false;
   isMixiMode = false;
-  leftMenuArray: Menu[] = [];
-  menus: Menu[] = [];
-  copyMenus: Menu[] = [];
+  leftMenuArray: MenuOption[] = [];
+  menus: MenuOption[] = [];
+  copyMenus: MenuOption[] = [];
   authCodeArray: string[] = [];
   subTheme$: Observable<any>;
   destroyRef = inject(DestroyRef);
@@ -60,7 +60,7 @@ export class NavBarComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private tabService: TabService,
     private cdr: ChangeDetectorRef,
-    private themesService: ThemeService,
+    private themeService: ThemeService,
     private titleServe: Title,
     @Inject(DOCUMENT) private doc: Document
   ) {
@@ -69,11 +69,11 @@ export class NavBarComponent implements OnInit {
     this.subTheme$ = this.isOverMode$.pipe(
       switchMap(res => {
         this.isOverMode = res;
-        return this.themesOptions$;
+        return this.themeOption$;
       }),
       tap(options => {
-        this.themesMode = options.mode;
-        this.isMixiMode = this.themesMode === 'mixi';
+        this.themeMode = options.mode;
+        this.isMixiMode = this.themeMode === 'mixi';
       }),
       share(),
       takeUntilDestroyed(this.destroyRef)
@@ -107,7 +107,7 @@ export class NavBarComponent implements OnInit {
           }
 
           // Top menu mode, and not over mode, solves the bug of floating box menu when switching tabs in top mode
-          if (this.themesMode === 'top' && !this.isOverMode) {
+          if (this.themeMode === 'top' && !this.isOverMode) {
             this.closeMenu();
           }
         }),
@@ -174,22 +174,22 @@ export class NavBarComponent implements OnInit {
   }
 
   // deep copy clone menu array
-  cloneMenuArray(sourceMenuArray: Menu[], target: Menu[] = []): Menu[] {
+  cloneMenuArray(sourceMenuArray: MenuOption[], target: MenuOption[] = []): MenuOption[] {
     sourceMenuArray.forEach(item => {
-      const obj: Menu = { menuName: '', menuType: 'C', path: '', id: -1, fatherId: -1 };
+      const menuOption: MenuOption = { menuName: '', menuType: 'C', path: '', id: -1, fatherId: -1 };
       for (let i in item) {
         if (item.hasOwnProperty(i)) {
           // @ts-ignore
           if (Array.isArray(item[i])) {
             // @ts-ignore
-            obj[i] = this.cloneMenuArray(item[i]);
+            menuOption[i] = this.cloneMenuArray(item[i]);
           } else {
             // @ts-ignore
-            obj[i] = item[i];
+            menuOption[i] = item[i];
           }
         }
       }
-      target.push({ ...obj });
+      target.push({ ...menuOption });
     });
     return target;
   }
@@ -228,7 +228,7 @@ export class NavBarComponent implements OnInit {
     this.splitNavStoreService.setSplitLeftNavArrayStore(currentLeftNavArray);
   }
 
-  flatMenu(menus: Menu[], routePath: string): void {
+  flatMenu(menus: MenuOption[], routePath: string): void {
     menus.forEach(item => {
       item.selected = false;
       item.open = false;
@@ -242,7 +242,7 @@ export class NavBarComponent implements OnInit {
     });
   }
 
-  clickMenuItem(menus: Menu[]): void {
+  clickMenuItem(menus: MenuOption[]): void {
     if (!menus) {
       return;
     }
@@ -253,14 +253,14 @@ export class NavBarComponent implements OnInit {
   }
 
   // Change the current menu display state
-  changeOpen(currentMenu: Menu, allMenu: Menu[]): void {
+  changeOpen(currentMenu: MenuOption, allMenu: MenuOption[]): void {
     allMenu.forEach(item => {
       item.open = false;
     });
     currentMenu.open = true;
   }
 
-  closeMenuOpen(menus: Menu[]): void {
+  closeMenuOpen(menus: MenuOption[]): void {
     menus.forEach(menu => {
       menu.open = false;
       if (menu.children && menu.children.length > 0) {
@@ -271,7 +271,7 @@ export class NavBarComponent implements OnInit {
     });
   }
 
-  changeRoute(e: MouseEvent, menu: Menu): void {
+  changeRoute(e: MouseEvent, menu: MenuOption): void {
     if (menu.newLinkFlag) {
       fnStopMouseEvent(e);
       window.open(menu.path, '_blank');
@@ -289,7 +289,7 @@ export class NavBarComponent implements OnInit {
         this.menus = this.cloneMenuArray(this.copyMenus);
         this.clickMenuItem(this.menus);
         // In the mixed mode, click on the data source of the left menu, otherwise the menu with the secondary menu will not open when the collapsed state changes to expanded
-        if (this.themesMode === 'mixi') {
+        if (this.themeMode === 'mixi') {
           this.clickMenuItem(this.leftMenuArray);
         }
       } else {

@@ -26,7 +26,7 @@ export interface User {
 /*
  * User changes password
  * */
-export interface UserPsd {
+export interface UserPassword {
   id: number;
   oldPassword: string;
   newPassword: string;
@@ -58,7 +58,7 @@ export class AccountService {
     return this.http.put('/user/', param);
   }
 
-  public editAccountPsd(param: UserPsd): Observable<void> {
+  public editAccountPsd(param: UserPassword): Observable<void> {
     return this.http.put('/user/psd', param);
   }
 }

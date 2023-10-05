@@ -22,12 +22,12 @@ export class SubWindowWithService {
   };
   destroyRef = inject(DestroyRef);
 
-  constructor(private winWidthService: WindowsWidthService, private breakpointObserver: BreakpointObserver, private themesService: ThemeService) {}
+  constructor(private winWidthService: WindowsWidthService, private breakpointObserver: BreakpointObserver, private themeService: ThemeService) {}
 
   // Monitor the topic (top or side) and determine the minimum width of over mode
   subWidthForTheme(): void {
-    this.themesService
-      .getThemesMode()
+    this.themeService
+      .getThemeMode()
       .pipe(
         switchMap(res => {
           let maxWidth = '';
@@ -43,10 +43,10 @@ export class SubWindowWithService {
       )
       .subscribe(result => {
         const isOverMode = result.matches;
-        this.themesService.setIsOverMode(isOverMode);
+        this.themeService.setIsOverMode(isOverMode);
         // It is over mode, expand the left menu in the folded state
         if (isOverMode) {
-          this.themesService.setIsCollapsed(false);
+          this.themeService.setIsCollapsed(false);
         }
       });
   }

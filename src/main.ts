@@ -99,6 +99,12 @@ const APPINIT_PROVIDES = [
 
 if (environment.production) {
   enableProdMode();
+
+  // HACK: Don't log to console in production environment.
+  // TODO: This can be done in better way using logger service and logger factory.
+  if (window) {
+    window.console.log = window.console.warn = window.console.info = window.console.error = function () {};
+  }
 }
 
 bootstrapApplication(AppComponent, {
@@ -112,7 +118,7 @@ bootstrapApplication(AppComponent, {
       withInMemoryScrolling({
         scrollPositionRestoration: 'top'
       }),
-      withHashLocation(),
+      // withHashLocation(), // A LocationStrategy used to configure the Location service to represent its state in the hash fragment of the browser's URL : with "#"
       withComponentInputBinding() // Enable routing parameters bound to input attributes of components, new features of ng16
     ),
     importProvidersFrom(NzMessageServiceModule, NzDrawerServiceModule, NzModalModule),

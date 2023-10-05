@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Menu } from '@core/services/types';
+import { MenuOption } from '@core/services/types';
 
 // menu store service
 @Injectable({
   providedIn: 'root'
 })
 export class MenuStoreService {
-  private menuArray$ = new BehaviorSubject<Menu[]>([]);
+  private menuArray$ = new BehaviorSubject<MenuOption[]>([]);
 
   constructor() {}
 
-  setMenuArrayStore(menuArray: Menu[]): void {
+  setMenuArrayStore(menuArray: MenuOption[]): void {
     this.menuArray$.next(menuArray);
   }
 
-  getMenuArrayStore(): Observable<Menu[]> {
+  getMenuArrayStore(): Observable<MenuOption[]> {
     return this.menuArray$.asObservable();
   }
 }
