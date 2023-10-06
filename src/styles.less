@@ -1,0 +1,143 @@
+/* You can add global styles to this file, and also import other style files */
+@import (less) '/src/styles/bootstrap-utilities.css';
+@import (less) '/src/styles/bootstrap-extended.css';
+@import (less) '/src/styles/bootstrap-grid.css';
+@import '/src/styles/variables';
+@import '/src/styles/reboot';
+@import '/src/styles/common';
+
+@font-face {
+  .font-families;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Document
+   ========================================================================== */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS.
+ */
+html {
+  line-height: 1.5;
+    /* 1 */
+    -ms-text-size-adjust: 100%;
+    /* 2 */
+    -webkit-text-size-adjust: 100%;
+    /* 2 */
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.87);
+  height: 100vh;
+}
+
+@media only screen and (min-width: 0) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: @color-light;
+  font-size-adjust: 0.1;
+  font-weight: 300 !important;
+  font-size: inherit !important;
+  font-family: 'Inter-Light', sans-serif !important;
+  color: #0c1139 !important;
+  min-width: 320px;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: #f1f1f1;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-corner {
+  background: #f1f1f1;
+}
+
+/* Loading style */
+.global-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  will-change: transform;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.global-loader-fade-in {
+  will-change: transform;
+  opacity: 0;
+}
+
+.global-loader-hidden {
+  display: none;
+}
+
+.global-loader h1 {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  letter-spacing: 0.04rem;
+  white-space: pre;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: repeating-linear-gradient(to right, #f44336, #9c27b0, #3f51b5, #03a9f4, #009688, #8bc34a, #ffeb3b, #ff9800);
+  background-size: 750% auto;
+  background-position: 0 100%;
+  animation: gradient 20s infinite;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.night-bg {
+  background-color: #141414;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -750% 0;
+  }
+}

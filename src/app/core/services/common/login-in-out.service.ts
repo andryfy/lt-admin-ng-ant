@@ -31,7 +31,7 @@ export class LoginInOutService {
     private router: Router,
     private userInfoService: UserInfoService,
     private menuService: MenuStoreService,
-    private windowServicevice: WindowService
+    private windowService: WindowService
   ) {}
 
   // Get the menu array by user ID
@@ -43,7 +43,7 @@ export class LoginInOutService {
     return new Promise(resolve => {
       // Cache the token persistently. Please note that if there is no cache, it will be intercepted in the route guard and the route will not be allowed to jump.
       // This route is guarded at src/app/core/services/common/guard/judgeLogin.guard.ts
-      this.windowServicevice.setSessionStorage(TokenKey, TokenPrefix + token);
+      this.windowService.setSessionStorage(TokenKey, TokenPrefix + token);
       // Parse the token and get user information
       const userInfo: UserInfo = this.userInfoService.parseToken(TokenPrefix + token);
       // TODO: Here is the permission to manually add the button to open the details in the static page tab operation, because they involve routing jumps, and they will be guarded by walking, but the permissions are not managed by the backend, so the following two lines manually add permissions,
@@ -87,7 +87,7 @@ export class LoginInOutService {
 
   clearSessionCash(): Promise<void> {
     return new Promise(resolve => {
-      this.windowServicevice.removeSessionStorage(TokenKey);
+      this.windowService.removeSessionStorage(TokenKey);
       this.menuService.setMenuArrayStore([]);
       resolve();
     });

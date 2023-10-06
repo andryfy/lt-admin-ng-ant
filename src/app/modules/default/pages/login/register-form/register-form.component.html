@@ -3,21 +3,21 @@
   <form class="login-form" nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input the email address!">
-        <nz-input-group [nzSize]="'large'">
+        <nz-input-group nzSize="large">
           <input type="text" formControlName="name" nz-input placeholder="Mail" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="Please enter password!">
-        <nz-input-group [nzSize]="'large'">
+        <nz-input-group nzSize="large">
           <input type="password" formControlName="password" nz-input placeholder="Password of at least 6 characters, case sensitive" />
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control nzErrorTip="Please confirm your password!">
-        <nz-input-group [nzSize]="'large'">
+        <nz-input-group nzSize="large">
           <input type="text" formControlName="name" nz-input placeholder="Confirm Password" />
         </nz-input-group>
       </nz-form-control>
@@ -25,7 +25,7 @@
 
     <nz-form-item>
       <nz-form-control nzErrorTip="Please enter phone number!">
-        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" [nzSize]="'large'">
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" nzSize="large">
           <input type="text" formControlName="name" nz-input placeholder="Phone number" />
         </nz-input-group>
       </nz-form-control>
@@ -40,11 +40,11 @@
 
     <nz-form-item nz-row nzJustify="space-between">
       <nz-form-control class="flex-1" nz-col nzErrorTip="Please enter verification code!" style="max-width: 65%" [nzSm]="16" [nzXs]="15">
-        <nz-input-group [nzSize]="'large'">
+        <nz-input-group nzSize="large">
           <input type="password" formControlName="password" nz-input placeholder="Verification code" />
         </nz-input-group>
       </nz-form-control>
-      <button class="p-0" nz-button nz-col nzType="default" [nzSize]="'large'" [nzSm]="7" [nzXs]="7">Get verification code</button>
+      <button class="p-0" nz-button nz-col nzType="default" nzSize="large" [nzSm]="7" [nzXs]="7">Get verification code</button>
     </nz-form-item>
 
     <div class="login-form-margin" nz-row nzAlign="middle" nzJustify="space-between">

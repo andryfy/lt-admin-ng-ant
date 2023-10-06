@@ -21,8 +21,8 @@ export interface ModuleOptionStore {
 })
 export class ModuleService {
   public destroyRef = inject(DestroyRef);
-  private windowServicevice: WindowService = inject(WindowService);
-  private initthemeService: InitThemeService = inject(InitThemeService);
+  private windowService: WindowService = inject(WindowService);
+  private initThemeService: InitThemeService = inject(InitThemeService);
   private themeService: ThemeService = inject(ThemeService);
   private menuService: MenuService = inject(MenuService);
 
@@ -52,7 +52,7 @@ export class ModuleService {
             name: module.name
           };
           this.setModuleOptionStorage(moduleOptionStore).then(() => {
-            this.initthemeService.initTheme().then();
+            this.initThemeService.initTheme().then();
           });
 
           // Set ThemeOption config in storage
@@ -66,7 +66,7 @@ export class ModuleService {
   }
 
   public get moduleOptionStorage(): ModuleOptionStore {
-    const moduleOption: ModuleOptionStore = JSON.parse(this.windowServicevice.getStorage(ModuleOptionKey) as string);
+    const moduleOption: ModuleOptionStore = JSON.parse(this.windowService.getStorage(ModuleOptionKey) as string);
     console.warn('ModuleOption: ', moduleOption);
     return moduleOption;
   }
@@ -74,12 +74,12 @@ export class ModuleService {
   public setModuleOptionStorage(moduleOption: ModuleOptionStore): Promise<void> {
     return new Promise(resolve => {
       this.removeModuleOptionStorage();
-      this.windowServicevice.setStorage(ModuleOptionKey, JSON.stringify(moduleOption));
+      this.windowService.setStorage(ModuleOptionKey, JSON.stringify(moduleOption));
       return resolve();
     });
   }
 
   public removeModuleOptionStorage(): void {
-    this.windowServicevice.removeStorage(ModuleOptionKey);
+    this.windowService.removeStorage(ModuleOptionKey);
   }
 }

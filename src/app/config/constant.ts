@@ -1,6 +1,6 @@
 /* Define constant */
 
-import { ThemeOption } from '@app/core/services/types';
+import { OptionInterface, ThemeOption } from '@app/core/services/types';
 
 // The prefix of the request header token
 export const TokenPrefix = 'Bearer ';
@@ -28,6 +28,31 @@ export const tokenErrorCode = 1010;
 export const SideCollapsedMaxWidth = 700;
 // The top menu becomes the maximum width of over mode
 export const TopCollapsedMaxWidth = 1244;
+
+// Languages :
+export const LangList: OptionInterface[] = [
+  {
+    label: 'Malagasy',
+    value: 'mg-MG'
+  },
+  {
+    label: 'French',
+    value: 'fr-FR'
+  },
+  {
+    label: 'English',
+    value: 'en-US',
+    selected: true
+  },
+  {
+    label: 'Korean',
+    value: 'ko-KO'
+  },
+  {
+    label: 'German',
+    value: 'nl-NL'
+  }
+];
 
 // Default theme value
 export const InitTheme: ThemeOption = {

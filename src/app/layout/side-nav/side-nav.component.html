@@ -1,7 +1,7 @@
 <div class="left-nav-wrap" [class.dark-scrollbar]="(themeOption$ | async)!.theme === 'dark'">
   <div *ngIf="(themeOption$ | async)!.hasNavHeadArea" class="sidebar-logo" [class.p-l-8]="isCollapsed$ | async">
     <a href="#" target="_blank">
-      <img alt="logo" src="/assets/imgs/logo.svg" />
+      <img alt="logo" src="/assets/images/logo.svg" />
       <h1 class="animate-02" [class.light]="(themeOption$ | async)!.theme === 'light' && (isNightTheme$ | async) === false">LT Admin</h1>
     </a>
   </div>

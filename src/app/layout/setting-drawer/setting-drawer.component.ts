@@ -65,13 +65,13 @@ export class SettingDrawerComponent implements OnInit {
   themes: Theme[] = [
     {
       key: 'dark',
-      image: '/assets/imgs/theme-dark.svg',
+      image: '/assets/images/theme-dark.svg',
       title: 'Dark menu style',
       isChecked: true
     },
     {
       key: 'light',
-      image: '/assets/imgs/theme-light.svg',
+      image: '/assets/images/theme-light.svg',
       title: 'Bright menu style',
       isChecked: false
     }
@@ -129,19 +129,19 @@ export class SettingDrawerComponent implements OnInit {
   modes: ThemeMode[] = [
     {
       key: 'side',
-      image: '/assets/imgs/menu-side.svg',
+      image: '/assets/images/menu-side.svg',
       title: 'Side menu layout',
       isChecked: true
     },
     {
       key: 'top',
-      image: '/assets/imgs/menu-top.svg',
+      image: '/assets/images/menu-top.svg',
       title: 'Top menu layout',
       isChecked: false
     },
     {
       key: 'mixi',
-      image: '/assets/imgs/menu-top.svg',
+      image: '/assets/images/menu-top.svg',
       title: 'Mixed menu layout',
       isChecked: false
     }
@@ -155,7 +155,7 @@ export class SettingDrawerComponent implements OnInit {
     private tabService: TabService,
     private nzConfigService: NzConfigService,
     private themeSkinService: ThemeSkinService,
-    private windowServicevice: WindowService,
+    private windowService: WindowService,
     private loginInOutService: LoginInOutService,
     @Inject(DOCUMENT) private doc: Document
   ) {}
@@ -177,7 +177,7 @@ export class SettingDrawerComponent implements OnInit {
 
   // Modify the night theme
   changeNightTheme(isNight: boolean): void {
-    this.windowServicevice.setStorage(IsNightKey, `${isNight}`);
+    this.windowService.setStorage(IsNightKey, `${isNight}`);
     this.themeService.setIsNightTheme(isNight);
     this.themeSkinService.toggleTheme().then();
   }
@@ -205,7 +205,7 @@ export class SettingDrawerComponent implements OnInit {
   // Set theme parameters
   setThemeOption(): void {
     this.themeService.setThemeMode(this._themeOption);
-    this.windowServicevice.setStorage(ThemeOptionKey, JSON.stringify(this._themeOption));
+    this.windowService.setStorage(ThemeOptionKey, JSON.stringify(this._themeOption));
   }
 
   // Modify fixed header

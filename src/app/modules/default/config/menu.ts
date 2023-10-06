@@ -11,7 +11,7 @@ export const defaultMenu: MenuOption[] = [
     selected: false,
     menuType: 'C',
     path: '/default/dashboard',
-    code: ActionCode.TabsDetail,
+    code: 'default',
     children: [
       {
         id: 1,
@@ -21,7 +21,7 @@ export const defaultMenu: MenuOption[] = [
         icon: 'area-chart',
         selected: false,
         menuType: 'C',
-        code: ActionCode.TabsDetail,
+        code: 'default',
         path: '/default/dashboard/analysis'
       },
       {
@@ -32,7 +32,7 @@ export const defaultMenu: MenuOption[] = [
         icon: 'radar-chart',
         selected: false,
         menuType: 'C',
-        code: ActionCode.TabsDetail,
+        code: 'default',
         path: '/default/dashboard/monitor'
       },
       {
@@ -43,7 +43,7 @@ export const defaultMenu: MenuOption[] = [
         icon: 'control',
         selected: false,
         menuType: 'C',
-        code: ActionCode.TabsDetail,
+        code: 'default',
         path: '/default/dashboard/workbench'
       }
     ]
@@ -54,7 +54,7 @@ export const defaultMenu: MenuOption[] = [
     open: false,
     id: 1,
     fatherId: 0,
-    code: ActionCode.TabsDetail,
+    code: 'default',
     selected: false,
     menuType: 'C',
     path: '/default/page-demo',
@@ -67,7 +67,7 @@ export const defaultMenu: MenuOption[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: ActionCode.TabsDetail,
+        code: 'default',
         path: '/default/page-demo/form',
         children: [
           {
@@ -78,7 +78,7 @@ export const defaultMenu: MenuOption[] = [
             selected: false,
             menuType: 'C',
             icon: 'form',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             path: '/default/page-demo/form/base-form'
           },
           {
@@ -88,7 +88,7 @@ export const defaultMenu: MenuOption[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             icon: 'form',
             path: '/default/page-demo/form/step-form'
           },
@@ -99,7 +99,7 @@ export const defaultMenu: MenuOption[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             icon: 'form',
             path: '/default/page-demo/form/advanced-form'
           }
@@ -111,7 +111,7 @@ export const defaultMenu: MenuOption[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: ActionCode.TabsDetail,
+        code: 'default',
         id: 1,
         fatherId: 0,
         path: '/default/page-demo/list',
@@ -123,7 +123,7 @@ export const defaultMenu: MenuOption[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             icon: 'table',
             path: '/default/page-demo/list/search-list',
             children: [
@@ -135,7 +135,7 @@ export const defaultMenu: MenuOption[] = [
                 selected: false,
                 menuType: 'C',
                 icon: 'table',
-                code: ActionCode.TabsDetail,
+                code: 'default',
                 path: '/default/page-demo/list/search-list/article'
               },
               {
@@ -146,7 +146,7 @@ export const defaultMenu: MenuOption[] = [
                 selected: false,
                 menuType: 'C',
                 icon: 'table',
-                code: ActionCode.TabsDetail,
+                code: 'default',
                 path: '/default/page-demo/list/search-list/project'
               },
               {
@@ -157,7 +157,7 @@ export const defaultMenu: MenuOption[] = [
                 selected: false,
                 menuType: 'C',
                 icon: 'table',
-                code: ActionCode.TabsDetail,
+                code: 'default',
                 path: '/default/page-demo/list/search-list/application'
               }
             ]
@@ -170,7 +170,7 @@ export const defaultMenu: MenuOption[] = [
             selected: false,
             menuType: 'C',
             icon: 'table',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             path: '/default/page-demo/list/search-table'
           },
           {
@@ -181,7 +181,7 @@ export const defaultMenu: MenuOption[] = [
             selected: false,
             menuType: 'C',
             icon: 'table',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             path: '/default/page-demo/list/tree-list'
           },
           {
@@ -192,7 +192,7 @@ export const defaultMenu: MenuOption[] = [
             selected: false,
             menuType: 'C',
             icon: 'table',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             path: '/default/page-demo/list/standard-table'
           },
           {
@@ -203,7 +203,7 @@ export const defaultMenu: MenuOption[] = [
             selected: false,
             menuType: 'C',
             icon: 'table',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             path: '/default/page-demo/list/card-table'
           }
         ]
@@ -216,7 +216,7 @@ export const defaultMenu: MenuOption[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: ActionCode.TabsDetail,
+        code: 'default',
         path: '/default/page-demo/detail',
         children: [
           {
@@ -226,7 +226,7 @@ export const defaultMenu: MenuOption[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             icon: 'profile',
             path: '/default/page-demo/detail/base-detail'
           },
@@ -237,7 +237,7 @@ export const defaultMenu: MenuOption[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             icon: 'profile',
             path: '/default/page-demo/detail/adv-detail'
           }
@@ -251,7 +251,7 @@ export const defaultMenu: MenuOption[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: ActionCode.TabsDetail,
+        code: 'default',
         path: '/default/page-demo/result',
         children: [
           {
@@ -262,7 +262,7 @@ export const defaultMenu: MenuOption[] = [
             selected: false,
             menuType: 'C',
             icon: 'check-circle',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             path: '/default/page-demo/result/success'
           },
           {
@@ -272,7 +272,7 @@ export const defaultMenu: MenuOption[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             icon: 'check-circle',
             path: '/default/page-demo/result/fail'
           }
@@ -286,7 +286,7 @@ export const defaultMenu: MenuOption[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: ActionCode.TabsDetail,
+        code: 'default',
         path: '/default/page-demo/except',
         children: [
           {
@@ -294,7 +294,7 @@ export const defaultMenu: MenuOption[] = [
             fatherId: 0,
             menuName: '403',
             open: false,
-            code: ActionCode.TabsDetail,
+            code: 'default',
             selected: false,
             menuType: 'C',
             icon: 'warning',
@@ -308,7 +308,7 @@ export const defaultMenu: MenuOption[] = [
             selected: false,
             menuType: 'C',
             icon: 'warning',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             path: '/default/page-demo/except/except404'
           },
           {
@@ -318,7 +318,7 @@ export const defaultMenu: MenuOption[] = [
             open: false,
             selected: false,
             menuType: 'C',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             icon: 'warning',
             path: '/default/page-demo/except/except500'
           }
@@ -332,7 +332,7 @@ export const defaultMenu: MenuOption[] = [
         open: false,
         selected: false,
         menuType: 'C',
-        code: ActionCode.TabsDetail,
+        code: 'default',
         path: '/default/page-demo/personal',
         children: [
           {
@@ -343,7 +343,7 @@ export const defaultMenu: MenuOption[] = [
             selected: false,
             menuType: 'C',
             icon: 'user',
-            code: ActionCode.TabsDetail,
+            code: 'default',
             path: '/default/page-demo/personal/personal-center'
           },
           {
@@ -351,7 +351,7 @@ export const defaultMenu: MenuOption[] = [
             fatherId: 0,
             menuName: 'Personal settings',
             open: false,
-            code: ActionCode.TabsDetail,
+            code: 'default',
             selected: false,
             menuType: 'C',
             icon: 'user',
@@ -366,7 +366,7 @@ export const defaultMenu: MenuOption[] = [
         icon: '',
         alIcon: 'icon-mel-help',
         open: false,
-        code: ActionCode.TabsDetail,
+        code: 'default',
         selected: false,
         menuType: 'C',
         path: '/default/page-demo/flow',
@@ -380,7 +380,7 @@ export const defaultMenu: MenuOption[] = [
             menuType: 'C',
             icon: 'highlight',
             path: '/default/page-demo/flow/flow-chat',
-            code: ActionCode.TabsDetail
+            code: 'default'
           }
         ]
       }
@@ -392,7 +392,7 @@ export const defaultMenu: MenuOption[] = [
     menuName: 'About',
     icon: 'solution',
     open: false,
-    code: ActionCode.TabsDetail,
+    code: 'default',
     selected: false,
     menuType: 'C',
     path: '/default/about'

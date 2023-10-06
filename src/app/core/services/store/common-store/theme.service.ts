@@ -10,7 +10,7 @@ import { ThemeOption } from '../../types';
   providedIn: 'root'
 })
 export class ThemeService {
-  private windowServicevice: WindowService = inject(WindowService);
+  private windowService: WindowService = inject(WindowService);
 
   private isNightTheme$ = new BehaviorSubject<boolean>(false);
   private isOverModeTheme$ = new BehaviorSubject<boolean>(false);
@@ -22,7 +22,7 @@ export class ThemeService {
 
   // Get theme options
   getThemeOptionStorage(): ThemeOption {
-    const themeOption = this.windowServicevice.getStorage(ThemeOptionKey) || '';
+    const themeOption = this.windowService.getStorage(ThemeOptionKey) || '';
     return JSON.parse(themeOption);
   }
 
@@ -64,7 +64,7 @@ export class ThemeService {
 
   // TODO: Theme Custom for each module
   public get themeOptionStorage(): ThemeOption {
-    const themeOption: ThemeOption = JSON.parse(this.windowServicevice.getStorage(ThemeOptionKey) as string);
+    const themeOption: ThemeOption = JSON.parse(this.windowService.getStorage(ThemeOptionKey) as string);
     console.warn('ThemeOption: ', themeOption);
     return themeOption;
   }
@@ -73,10 +73,10 @@ export class ThemeService {
     console.warn('NewTheme: ', themeOption);
 
     this.removeThemeOptionStorage();
-    this.windowServicevice.setStorage(ThemeOptionKey, JSON.stringify(themeOption));
+    this.windowService.setStorage(ThemeOptionKey, JSON.stringify(themeOption));
   }
 
   public removeThemeOptionStorage(): void {
-    this.windowServicevice.removeStorage(ThemeOptionKey);
+    this.windowService.removeStorage(ThemeOptionKey);
   }
 }

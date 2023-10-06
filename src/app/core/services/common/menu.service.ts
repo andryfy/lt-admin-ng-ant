@@ -40,11 +40,6 @@ export class MenuService {
           takeUntilDestroyed(this.destroyRef)
         )
         .subscribe(menuList => {
-          menuList = menuList.filter(item => {
-            item.selected = false;
-            item.open = false;
-            return item.menuType === 'C';
-          });
           const temp = fnFlatDataHasParentToTree(menuList);
           // Storage menu
           this.menuStoreService.setMenuArrayStore(temp);

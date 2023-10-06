@@ -15,10 +15,10 @@ interface CustomHttpConfig {
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
-  constructor(private windowServicevice: WindowService, public message: NzMessageService) {}
+  constructor(private windowService: WindowService, public message: NzMessageService) {}
 
   intercept(req: HttpRequest<NzSafeAny>, next: HttpHandler): Observable<HttpEvent<NzSafeAny>> {
-    const token = this.windowServicevice.getSessionStorage(TokenKey);
+    const token = this.windowService.getSessionStorage(TokenKey);
     let httpConfig: CustomHttpConfig = {};
     if (!!token) {
       httpConfig = { headers: req.headers.set(TokenKey, token) };

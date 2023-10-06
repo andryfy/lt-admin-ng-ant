@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } 
 import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
+import { AuthService } from '@app/core/services/common/auth.service';
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
 import { WindowService } from '@core/services/common/window.service';
 import { LoginService } from '@core/services/http/login/login.service';
@@ -35,11 +36,8 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private loginInOutService: LoginInOutService,
-    private menuService: MenuStoreService,
-    private dataService: LoginService,
+    private authService: AuthService,
     private spinService: SpinService,
-    private windowServicevice: WindowService,
-    private userInfoService: UserInfoService,
     private notification: NzNotificationService,
     private router: Router
   ) {}
@@ -52,7 +50,7 @@ export class LoginFormComponent implements OnInit {
     // Set global loading
     this.spinService.setCurrentGlobalSpinStore(true);
     // Get form value
-    const param = this.validateForm.getRawValue();
+    const body = this.validateForm.getRawValue();
     // Call the login interface
     // TODO: The login backend returns to the unified mode. If the code is not 0, it will be automatically intercepted. If you need to modify it, please modify it in src/app/core/services/http/base-http.service.ts
     // {
@@ -60,8 +58,8 @@ export class LoginFormComponent implements OnInit {
     //   data:any,
     //   msg：string
     // }
-    this.dataService
-      .login(param)
+    this.authService
+      .signIn(body)
       .pipe(
         // Anyway set global loading to false
         finalize(() => {
@@ -71,33 +69,25 @@ export class LoginFormComponent implements OnInit {
       )
       .subscribe(userToken => {
         // After successful backend login here, only a set of tokens encrypted by jwt will be returned. The tokens need to be parsed below.
-        this.loginInOutService
-          .loginIn(userToken)
-          .then(() => {
-            this.router.navigateByUrl('default/dashboard/analysis');
-          })
-          .finally(() => {
-            this.spinService.setCurrentGlobalSpinStore(false);
-            this.notification.blank(
-              'Kind tips',
-              `A real example of addition, deletion, modification and query was made under the "System Management" menu. The data is reset every 10 minutes, so you can operate with confidence.
-                <br>
-                I build the server at my own expense every year. If this project is useful to you, please give me a free github star to encourage me. Thank you very much!
-                Source address:<a href="https://github.com/andryfy/lt-admin-ng-ant">it's here</a>
-            `,
-              {
-                nzDuration: 0
-              }
-            );
-          });
+        this.spinService.setCurrentGlobalSpinStore(false);
+        this.notification.blank(
+          'Kind tips',
+          `A real example of addition, deletion, modification and query was made under the "System Management" menu. The data is reset every 10 minutes, so you can operate with confidence.
+            <br>
+            I build the server at my own expense every year. If this project is useful to you, please give me a free github star to encourage me. Thank you very much!
+            Source address:<a href="https://github.com/andryfy/lt-admin-ng-ant">it's here</a>
+        `,
+          {
+            nzDuration: 0
+          }
+        );
       });
   }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [null]
+      username: [null, [Validators.required]],
+      password: [null, [Validators.required]]
     });
   }
 }

@@ -16,6 +16,7 @@ export class DynamicComponent {
 export interface OptionInterface {
   value: number | string;
   label: string;
+  selected?: boolean;
 }
 
 // List search

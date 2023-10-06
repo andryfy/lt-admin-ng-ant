@@ -1,0 +1,154 @@
+img {
+  display: inline-block;
+  width: 100%;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+audio,
+video {
+  outline: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+a {
+  color: inherit;
+  transition: all 0.2s;
+
+  &:hover {
+    color: inherit;
+    // text-decoration: underline;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  font-weight: 400;
+  line-height: 1.3;
+  // color: @color-dark;
+}
+
+/**
+ * Add the correct display in IE 9-.
+ */
+article,
+aside,
+footer,
+header,
+nav,
+section {
+  display: block;
+}
+
+/* Forms
+    ========================================================================== */
+/**
+  * 1. Change the font styles in all browsers (opinionated).
+  * 2. Remove the margin in Firefox and Safari.
+  */
+button,
+input,
+optgroup,
+select,
+textarea {
+  /* 1 */
+  font-size: 100%;
+  /* 1 */
+  line-height: 1.15;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+}
+
+table,
+th,
+td {
+  border: none;
+}
+
+table {
+  width: 100%;
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 15px 5px;
+  display: table-cell;
+  text-align: left;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
+ul {
+  & > li {
+    list-style-type: none;
+  }
+}
+
+canvas {
+  width: 100% !important;
+}
+
+[role='link'],
+[role='button'] {
+  cursor: pointer;
+  opacity: 0.5 !important;
+}
+
+[role='button']:hover {
+  opacity: 1 !important;
+  background-color: #ededed !important;
+}
+
+/* Common class */
+.default-link:hover {
+  text-decoration: underline;
+}
+
+.bg-gradient-default {
+  background: @color-gradient-default !important;
+}
+
+.small-shadow {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.04);
+}
+
+.text-dark,
+.text-dark * {
+  color: @color-black !important;
+}
+
+.text-blue-dark {
+  color: @color-blue-dark !important;
+}
+
+.border-primary {
+  border-color: #628bff !important;
+}
+
+.border-success {
+  border-color: #3f8600 !important;
+}
+
+.border-warning {
+  border-color: #ff9800 !important;
+}
+
+.border-error {
+  border-color: #f44336 !important;
+}

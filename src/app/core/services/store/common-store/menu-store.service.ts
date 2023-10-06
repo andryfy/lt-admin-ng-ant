@@ -13,6 +13,7 @@ export class MenuStoreService {
   constructor() {}
 
   setMenuArrayStore(menuArray: MenuOption[]): void {
+    console.warn('MenuListNav: ', menuArray);
     this.menuArray$.next(menuArray);
   }
 

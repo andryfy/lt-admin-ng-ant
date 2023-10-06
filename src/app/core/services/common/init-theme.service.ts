@@ -37,16 +37,16 @@ export class InitThemeService {
     }
   ];
 
-  constructor(private themeService: ThemeService, private windowServicevice: WindowService) {}
+  constructor(private themeService: ThemeService, private windowService: WindowService) {}
 
   initTheme(): Promise<void> {
     return new Promise(resolve => {
       this.themeInitOption.forEach(item => {
-        const hasCash = this.windowServicevice.getStorage(item.storageKey);
+        const hasCash = this.windowService.getStorage(item.storageKey);
         if (hasCash) {
           this.themeService[item.setMethodName](JSON.parse(hasCash));
         } else {
-          (this.themeService[item.getMethodName]() as Observable<NzSafeAny>).pipe(first()).subscribe(res => this.windowServicevice.setStorage(item.storageKey, JSON.stringify(res)));
+          (this.themeService[item.getMethodName]() as Observable<NzSafeAny>).pipe(first()).subscribe(res => this.windowService.setStorage(item.storageKey, JSON.stringify(res)));
         }
       });
       return resolve();

@@ -50,7 +50,7 @@ export class BaseComponent implements OnInit, AfterViewInit {
   isOverMode = false; // When the window becomes narrower, whether the navigation bar becomes drawer mode
   @ViewChild('navDrawer') navDrawer!: NavDrawerComponent;
   destroyRef = inject(DestroyRef);
-  constructor(private themeService: ThemeService, private driverService: DriverService, private windowServicevice: WindowService) {}
+  constructor(private themeService: ThemeService, private driverService: DriverService, private windowService: WindowService) {}
 
   changeCollapsed(): void {
     if (this.isOverMode) {
@@ -78,10 +78,10 @@ export class BaseComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.windowServicevice.getStorage(IsFirstLogin) === 'false') {
+    if (this.windowService.getStorage(IsFirstLogin) === 'false') {
       return;
     }
-    this.windowServicevice.setStorage(IsFirstLogin, 'false');
+    this.windowService.setStorage(IsFirstLogin, 'false');
     this.driverService.load();
   }
 

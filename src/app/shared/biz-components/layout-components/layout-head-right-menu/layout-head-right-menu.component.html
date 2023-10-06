@@ -39,39 +39,47 @@
       </nz-badge>
     </span>
     <span class="bst-header-icon" nz-dropdown nzTrigger="click" [nzDropdownMenu]="userSettingMenu">
-      <img class="avatar" alt="" src="/assets/imgs/default_face.png" />
+      <img class="avatar" alt="" src="/assets/images/default-face.png" />
       <span class="base-font-size">John DOE</span>
     </span>
     <nz-dropdown-menu #userSettingMenu>
-      <ul nz-menu>
-        <li nz-menu-item (click)="goPage('personal-center')">
-          <i class="m-r-8" nz-icon nzTheme="outline" nzType="user"></i>
-          <span>Personal Center</span>
-        </li>
-        <li nz-menu-item (click)="goPage('personal-setting')">
-          <i class="m-r-8" nz-icon nzTheme="outline" nzType="setting"></i>
-          <span>Personal settings</span>
-        </li>
-        <li nz-menu-item (click)="changePassWorld()">
-          <i class="m-r-8" nz-icon nzTheme="outline" nzType="lock"></i>
-          <span>Change Password</span>
-        </li>
-        <li nz-menu-divider></li>
-        <li nz-menu-item (click)="clean()">
-          <i class="m-r-8" nz-icon nzTheme="outline" nzType="clear"></i>
-          <span>Clear Cache</span>
-        </li>
-        <li nz-menu-item (click)="lockScreen()">
-          <i class="m-r-8" nz-icon nzTheme="outline" nzType="lock"></i>
-          <span>Lock Screen</span>
-        </li>
-        <li nz-menu-item>
-          <div (click)="goLogin()">
-            <i class="m-r-8" nz-icon nzTheme="outline" nzType="logout"></i>
-            <span>Sign Out</span>
-          </div>
-        </li>
-      </ul>
+      <div class="bg-white shadow-lg setting-wrapper">
+        <div class="d-flex flex-column align-items-center user-setting-card px-2 py-4">
+          <span class="fs-4 fw-bold text-center">johndoe</span>
+          <nz-avatar class="my-2" nzIcon="user" nzSrc="/assets/images/default-face.png" [nzSize]="64" />
+          <span class="fs-5 text-center px-3">John Doe</span>
+          <span class="fs-6 text-center px-4 font-light">johndoe@mail.lt</span>
+        </div>
+        <ul nz-menu>
+          <li nz-menu-item (click)="goPage('personal-center')">
+            <i class="m-r-8" nz-icon nzTheme="outline" nzType="user"></i>
+            <span>Personal Center</span>
+          </li>
+          <li nz-menu-item (click)="goPage('personal-setting')">
+            <i class="m-r-8" nz-icon nzTheme="outline" nzType="setting"></i>
+            <span>Personal settings</span>
+          </li>
+          <li nz-menu-item (click)="changePassWorld()">
+            <i class="m-r-8" nz-icon nzTheme="outline" nzType="lock"></i>
+            <span>Change Password</span>
+          </li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item (click)="clean()">
+            <i class="m-r-8" nz-icon nzTheme="outline" nzType="clear"></i>
+            <span>Clear Cache</span>
+          </li>
+          <li nz-menu-item (click)="lockScreen()">
+            <i class="m-r-8" nz-icon nzTheme="outline" nzType="lock"></i>
+            <span>Lock Screen</span>
+          </li>
+          <li nz-menu-item>
+            <div (click)="goLogin()">
+              <i class="m-r-8" nz-icon nzTheme="outline" nzType="logout"></i>
+              <span>Sign Out</span>
+            </div>
+          </li>
+        </ul>
+      </div>
     </nz-dropdown-menu>
 
     <span class="bst-header-icon" nz-dropdown nzTrigger="click" [nzDropdownMenu]="language">
@@ -79,11 +87,7 @@
     </span>
     <nz-dropdown-menu #language="nzDropdownMenu">
       <ul nz-menu nzSelectable>
-        <li nz-menu-item (click)="showMessage()">Malagasy</li>
-        <li nz-menu-item (click)="showMessage()">French</li>
-        <li nz-menu-item nzSelected (click)="showMessage()">English</li>
-        <li nz-menu-item (click)="showMessage()">Korean</li>
-        <li nz-menu-item (click)="showMessage()">German</li>
+        <li *ngFor="let lang of langList" nz-menu-item [nzSelected]="lang.selected" (click)="switchLang(lang)">{{ lang.label }}</li>
       </ul>
     </nz-dropdown-menu>
   </div>

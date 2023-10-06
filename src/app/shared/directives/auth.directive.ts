@@ -1,5 +1,6 @@
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, Input, TemplateRef, ViewContainerRef, inject } from '@angular/core';
 
+import { UserInfo, AuthService } from '@app/core/services/common/auth.service';
 import { UserInfoService } from '@store/common-store/userInfo.service';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -8,7 +9,11 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   standalone: true
 })
 export class AuthDirective {
-  codeArray!: string[];
+  private templateRef: TemplateRef<NzSafeAny> = inject(TemplateRef<NzSafeAny>);
+  private viewContainerRef: ViewContainerRef = inject(ViewContainerRef);
+  private authService: AuthService = inject(AuthService);
+
+  user!: UserInfo;
 
   @Input('appAuth')
   set appAuth(authCode: string | undefined) {
@@ -16,13 +21,11 @@ export class AuthDirective {
       this.show(true);
       return;
     }
-    this.codeArray.includes(authCode) ? this.show(true) : this.show(false);
+    authCode === this.user.role ? this.show(true) : this.show(false);
   }
 
-  constructor(private userInfoService: UserInfoService, private templateRef: TemplateRef<NzSafeAny>, private viewContainerRef: ViewContainerRef) {
-    this.userInfoService.getUserInfo().subscribe(userInfo => {
-      this.codeArray = userInfo.authCode;
-    });
+  constructor() {
+    this.user = this.authService.userStorage;
   }
 
   private show(hasAuth: boolean): void {

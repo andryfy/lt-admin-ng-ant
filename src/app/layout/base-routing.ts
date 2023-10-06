@@ -10,7 +10,7 @@ export default [
     path: '',
     component: BaseComponent,
     data: { shouldDetach: 'no', preload: true },
-    canActivateChild: [JudgeLoginGuard, JudgeAuthGuard],
+    // canActivateChild: [JudgeLoginGuard, JudgeAuthGuard],
     children: [
       { path: '', redirectTo: 'default', pathMatch: 'full' },
       { path: 'default', data: { preload: true }, loadChildren: () => import('@default/default.module').then(m => m.DefaultModule) }

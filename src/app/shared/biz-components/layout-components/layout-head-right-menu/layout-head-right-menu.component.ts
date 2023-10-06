@@ -1,7 +1,9 @@
-import { NgTemplateOutlet, NgIf } from '@angular/common';
+import { NgTemplateOutlet, NgIf, NgFor } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { LangList } from '@app/config/constant';
+import { OptionInterface } from '@app/core/services/types';
 import { LoginInOutService } from '@core/services/common/login-in-out.service';
 import { WindowService } from '@core/services/common/window.service';
 import { AccountService, UserPassword } from '@http/system/account.service';
@@ -13,6 +15,7 @@ import { ModalBtnStatus } from '@widgets/base-modal';
 import { ChangePasswordService } from '@widgets/biz-widget/change-password/change-password.service';
 import { LockWidgetService } from '@widgets/common-widget/lock-widget/lock-widget.service';
 import { SearchRouteService } from '@widgets/common-widget/search-route/search-route.service';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
@@ -31,20 +34,24 @@ import { HomeNoticeComponent } from '../home-notice/home-notice.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    NgIf,
+    NgFor,
     NgTemplateOutlet,
     ScreenLessHiddenDirective,
     NzToolTipModule,
     NzIconModule,
     NzButtonModule,
-    ToggleFullscreenDirective,
-    NgIf,
     NzDropDownModule,
     NzBadgeModule,
     NzMenuModule,
+    NzAvatarModule,
+    ToggleFullscreenDirective,
     HomeNoticeComponent
   ]
 })
 export class LayoutHeadRightMenuComponent implements OnInit {
+  langList: OptionInterface[] = LangList;
+
   user!: UserPassword;
 
   constructor(
@@ -53,7 +60,7 @@ export class LayoutHeadRightMenuComponent implements OnInit {
     private spinService: SpinService,
     private loginOutService: LoginInOutService,
     private lockWidgetService: LockWidgetService,
-    private windowServicevice: WindowService,
+    private windowService: WindowService,
     private activatedRoute: ActivatedRoute,
     private searchRouteService: SearchRouteService,
     public message: NzMessageService,
@@ -110,14 +117,14 @@ export class LayoutHeadRightMenuComponent implements OnInit {
   }
 
   clean(): void {
-    this.windowServicevice.clearStorage();
-    this.windowServicevice.clearSessionStorage();
+    this.windowService.clearStorage();
+    this.windowService.clearSessionStorage();
     this.loginOutService.loginOut().then();
     this.message.success('Cleared successfully, please log in again');
   }
 
-  showMessage(): void {
-    this.message.info('Switch successful');
+  switchLang(language: OptionInterface): void {
+    this.message.info(`Language switch successful to ${language.label} (${language.value})`);
   }
 
   goPage(path: string): void {

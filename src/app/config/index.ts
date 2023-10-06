@@ -1,6 +1,7 @@
 import { InjectionToken } from '@angular/core';
 
 import { ModuleOption } from '@app/core/services/types';
+import { defaultModuleOption } from '@app/modules/default/config';
 
 // /!*Define module*!/
 export const MODULE_TOKEN = new InjectionToken<ModuleOption[]>('module-token', {
@@ -10,4 +11,4 @@ export const MODULE_TOKEN = new InjectionToken<ModuleOption[]>('module-token', {
   }
 });
 
-const configList: ModuleOption[] = [];
+const configList: ModuleOption[] = [defaultModuleOption];
